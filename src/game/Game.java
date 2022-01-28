@@ -1,6 +1,7 @@
 /*
 * Game is the class that holds the window, the display to which things will be drawn
 * Holds the inputs
+* It's like a central hub with everything? Like a handler?
 */
 
 package game;
