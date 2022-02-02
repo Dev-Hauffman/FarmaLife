@@ -11,7 +11,7 @@ public class Vector2D {
     }
 
     public double length() {
-        return Math.sqrt(x + x + y * y);
+        return Math.sqrt(x * x + y * y);
     }
 
     public void normalize() {

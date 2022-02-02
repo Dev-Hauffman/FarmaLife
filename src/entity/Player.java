@@ -1,23 +1,16 @@
 package entity;
-import java.awt.Image;
 
 import controller.IController;
+import gfx.SpriteLibrary;
 
 public class Player extends MovingEntity{
 
-    public Player(IController controller){
-        super(controller);
+    public Player(IController controller, SpriteLibrary spriteLibrary){
+        super(controller, spriteLibrary);
     }
 
     @Override
     public void update() {
         super.update();
-    }
-
-    @Override
-    public Image getSprite() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
+    }    
 }
