@@ -5,14 +5,10 @@
 */
 
 package game;
-import java.util.ArrayList;
-import java.util.List;
 
-import controller.PlayerController;
 import display.Display;
-import entity.GameObject;
-import entity.Player;
-import gfx.SpriteLibrary;
+import game.state.GameState;
+import game.state.State;
 import input.Input;
 
 public class Game {
@@ -20,27 +16,21 @@ public class Game {
     public static int SPRITE_SIZE = 64;
 
     private Display display;
-    private List<GameObject> gameObject;
     private Input input;
-    private SpriteLibrary spriteLibrary;
+    private State state;
 
     public Game(int width, int height){
         input = new Input();
-        display = new Display(width, height, input);
-        gameObject =  new ArrayList<>();
-        spriteLibrary = new SpriteLibrary();
-        gameObject.add(new Player(new PlayerController(input), spriteLibrary));
+        display = new Display(width, height, input); 
+        state = new GameState(input);
     }
     
     public void update(){
-        gameObject.forEach(gameObject -> gameObject.update());
+        state.update();
     }
 
     public void render() {
-        display.render(this);
+        display.render(state);
     }
 
-    public List<GameObject> getGameObject() {
-        return gameObject;
-    }
 }

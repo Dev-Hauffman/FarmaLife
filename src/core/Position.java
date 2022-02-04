@@ -24,7 +24,7 @@ public class Position {
         return y;
     }
 
-    public void apply(Movement movement) {
+    public void apply(Motion movement) {
         Vector2D vector = movement.getVector();
         x += vector.getX();
         y += vector.getY();
