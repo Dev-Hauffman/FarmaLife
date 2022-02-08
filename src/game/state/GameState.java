@@ -8,10 +8,12 @@ import map.GameMap;
 
 public class GameState extends State {
 
-    public GameState(Input input) {
-        super(input);
-        gameObject.add(new Player(new PlayerController(input), spriteLibrary));
+    public GameState(Size windowSize, Input input) {
+        super(windowSize, input);
+        Player player = new Player(new PlayerController(input), spriteLibrary);
+        gameObject.add(player);
         gameMap = new GameMap(new Size(20, 20), spriteLibrary);
+        camera.focusOn(player);
     }
     
 }

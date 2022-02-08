@@ -3,6 +3,8 @@ package game.state;
 import java.util.ArrayList;
 import java.util.List;
 
+import core.Size;
+import display.Camera;
 import entity.GameObject;
 import gfx.SpriteLibrary;
 import input.Input;
@@ -13,15 +15,18 @@ public abstract class State {
     protected SpriteLibrary spriteLibrary;
     protected Input input;
     protected GameMap gameMap;
+    protected Camera camera;
 
-    public State(Input input) {
+    public State(Size windowSize, Input input) {
         this.input = input;
         gameObject =  new ArrayList<>();
-        spriteLibrary = new SpriteLibrary();        
+        spriteLibrary = new SpriteLibrary();
+        camera = new Camera(windowSize);
     }
 
     public void update() {
         gameObject.forEach(gameObject -> gameObject.update());
+        camera.update(this);
     }
 
     public List<GameObject> getGameObject() {
@@ -31,5 +36,9 @@ public abstract class State {
     public GameMap getGameMap() {
         return gameMap;
     }
+
+    public Camera getCamera() {
+        return camera;
+    }   
     
 }

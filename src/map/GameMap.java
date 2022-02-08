@@ -3,6 +3,7 @@ package map;
 import java.util.Arrays;
 
 import core.Size;
+import game.Game;
 import gfx.SpriteLibrary;
 
 public class GameMap {
@@ -23,5 +24,13 @@ public class GameMap {
     public Tile[][] getTiles() {
         return tiles;
     }    
+
+    public int getWidth() {
+        return tiles.length * Game.SPRITE_SIZE;
+    }
+
+    public int getHeight() {
+        return tiles[0].length * Game.SPRITE_SIZE;
+    }
 
 }
