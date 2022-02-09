@@ -6,6 +6,7 @@ import java.awt.*;
 
 import core.Position;
 import core.Size;
+import game.state.State;
 
 public abstract class GameObject {
     protected Position position;
@@ -16,12 +17,16 @@ public abstract class GameObject {
         size = new Size(50, 50);
     }
 
-    public abstract void update();
+    public abstract void update(State state);
 
     public abstract Image getSprite();
 
     public Position getPosition() {
         return position;
+    }    
+
+    public void setPosition(Position position) {
+        this.position = position;
     }
 
     public Size getSize() {

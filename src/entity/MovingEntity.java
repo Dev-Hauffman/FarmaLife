@@ -3,6 +3,7 @@ package entity;
 import controller.IController;
 import core.Direction;
 import core.Motion;
+import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 
@@ -10,10 +11,10 @@ import java.awt.Image;
 
 public abstract class MovingEntity extends GameObject {
     
-    private IController controller;
-    private Motion motion;
-    private AnimationManager animationManager;
-    private Direction direction;
+    protected IController controller;
+    protected Motion motion;
+    protected AnimationManager animationManager;
+    protected Direction direction;
 
     public MovingEntity(IController controller, SpriteLibrary spriteLibrary) {
         super();
@@ -24,7 +25,7 @@ public abstract class MovingEntity extends GameObject {
     }
 
     @Override
-    public void update() {
+    public void update(State state) {
         motion.update(controller);
         position.apply(motion);
         manageDirection();
