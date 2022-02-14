@@ -34,17 +34,14 @@ public class PlayerController implements IController{
         return input.isPressed(KeyEvent.VK_RIGHT);
     }
 
-    @Override
     public boolean isRequestingMindAccess() {
         return input.isPressed(KeyEvent.VK_SLASH);
     }
 
-    @Override
     public boolean isRequestingAnalysis() {
         return input.isPressed(KeyEvent.VK_SHIFT);
     }
 
-    @Override
     public boolean isRequestingExit() {
         return input.isPressed(KeyEvent.VK_ESCAPE);
     }    

@@ -28,7 +28,7 @@ public class Display extends JFrame{
         addKeyListener(input);
         pack();
 
-        canvas.createBufferStrategy(3);
+        canvas.createBufferStrategy(2);
 
         setLocationRelativeTo(null);
         setVisible(true);

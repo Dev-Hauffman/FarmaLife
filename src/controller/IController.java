@@ -12,11 +12,4 @@ public interface IController {
     boolean isRequestingLeft();
 
     boolean isRequestingRight();
-
-    boolean isRequestingMindAccess();
-
-    boolean isRequestingAnalysis();
-
-    boolean isRequestingExit();
-
 }
