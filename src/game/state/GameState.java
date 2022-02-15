@@ -1,5 +1,7 @@
 package game.state;
 
+import java.awt.Color;
+
 import controller.NPCController;
 import controller.PlayerController;
 import core.Size;
@@ -8,6 +10,11 @@ import entity.Player;
 import entity.effect.Sick;
 import input.Input;
 import map.GameMap;
+import ui.HorizontalContainer;
+import ui.Spacing;
+import ui.UIContainer;
+import ui.UIText;
+import ui.VerticalContainer;
 
 public class GameState extends State {
 
@@ -15,6 +22,16 @@ public class GameState extends State {
         super(windowSize, input);        
         gameMap = new GameMap(new Size(20, 20), spriteLibrary);        
         initializeCharacters();
+        initializeUI(windowSize);
+    }
+
+    private void initializeUI(Size windowSize) {
+        UIContainer container = new VerticalContainer(windowSize);
+        container.setPadding(new Spacing(5));
+        container.setBackgroundColor(new Color(0, 0, 0, 0));
+        
+        container.addUIComponent(new UIText("Hello UI World!"));
+        uiContainers.add(container);
     }
 
     private void initializeCharacters() {

@@ -4,6 +4,8 @@ import controller.IController;
 import core.CollisionBox;
 import core.Direction;
 import core.Motion;
+import core.Position;
+import core.Size;
 import entity.action.Action;
 import entity.effect.Effect;
 import game.state.State;
@@ -24,6 +26,8 @@ public abstract class MovingEntity extends GameObject {
     protected Optional<Action> action;
     protected List<Effect> effects;
 
+    protected Size collisionBoxSize;
+
     public MovingEntity(IController controller, SpriteLibrary spriteLibrary) {
         super();
         this.controller = controller;
@@ -32,6 +36,7 @@ public abstract class MovingEntity extends GameObject {
         this.animationManager = new AnimationManager(spriteLibrary.getUnit("dave"));
         effects = new ArrayList<>();
         action = Optional.empty();
+        this.collisionBoxSize = new Size(16, 28);
     }
 
     @Override
@@ -61,7 +66,7 @@ public abstract class MovingEntity extends GameObject {
             motion.update(controller);            
         }
         else {
-            motion.stop();
+            motion.stop(true, true);
         }
     }
 
@@ -102,12 +107,14 @@ public abstract class MovingEntity extends GameObject {
 
     @Override
     public CollisionBox getCollisionBox() {
+        Position positionWithMotion = Position.copyOf(position);
+        positionWithMotion.apply(motion);
         return new CollisionBox (
             new Rectangle(
-                position.intX(),
-                position.intY(),
-                size.getWidth(),
-                size.getHeight()
+                positionWithMotion.intX(),
+                positionWithMotion.intY(),
+                collisionBoxSize.getWidth(),
+                collisionBoxSize.getHeight()
             )
         );
     }
@@ -127,6 +134,22 @@ public abstract class MovingEntity extends GameObject {
 
     public void addEffect(Effect effect) {
         effects.add(effect);
+    }
+
+    public boolean willCollideX(GameObject other) {
+        CollisionBox otherBox = other.getCollisionBox();
+        Position positionWithXApplied = Position.copyOf(position);
+        positionWithXApplied.applyX(motion);
+
+        return CollisionBox.of(positionWithXApplied, collisionBoxSize).collidesWith(otherBox);
+    }
+
+    public boolean willCollideY(GameObject other) {
+        CollisionBox otherBox = other.getCollisionBox();
+        Position positionWithYApplied = Position.copyOf(position);
+        positionWithYApplied.applyY(motion);
+
+        return CollisionBox.of(positionWithYApplied, collisionBoxSize).collidesWith(otherBox);
     }
     
 }

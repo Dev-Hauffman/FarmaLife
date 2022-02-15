@@ -46,5 +46,17 @@ public class Position {
 
     public boolean isInRangeOf(Position position) {
         return Math.abs(x - position.getX()) < PROXIMITY_RANGE && Math.abs(y - position.getY()) < PROXIMITY_RANGE;
-    }    
+    }
+
+    public static Position copyOf(Position position) {
+        return new Position(position.getX(), position.getY());
+    }
+
+    public void applyX(Motion motion) {
+        x += motion.getVector().getX();
+    }
+
+    public void applyY(Motion motion) {
+        x += motion.getVector().getY();
+    }
 }

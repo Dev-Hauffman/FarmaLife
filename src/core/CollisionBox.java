@@ -17,5 +17,16 @@ public class CollisionBox {
     public Rectangle getBounds() {
         return bounds;
     }
+
+    public static CollisionBox of(Position position, Size size) {
+        return new CollisionBox(
+            new Rectangle(
+                position.intX(),
+                position.intY(),
+                size.getWidth(),
+                size.getHeight()
+            )
+        );
+    }
     
 }
