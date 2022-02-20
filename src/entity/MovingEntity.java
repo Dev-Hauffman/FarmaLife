@@ -1,58 +1,46 @@
 package entity;
 
-import controller.IController;
+import controller.IEntityController;
 import core.CollisionBox;
 import core.Direction;
 import core.Motion;
 import core.Position;
 import core.Size;
-import entity.action.Action;
-import entity.effect.Effect;
-import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
+import state.State;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 public abstract class MovingEntity extends GameObject {
     
-    protected IController controller;
+    protected IEntityController entityController;
     protected Motion motion;
     protected AnimationManager animationManager;
     protected Direction direction;
-    protected Optional<Action> action;
-    protected List<Effect> effects;
 
     protected Size collisionBoxSize;
 
-    public MovingEntity(IController controller, SpriteLibrary spriteLibrary) {
+    public MovingEntity(IEntityController controller, SpriteLibrary spriteLibrary) {
         super();
-        this.controller = controller;
+        this.entityController = controller;
         this.motion =  new Motion(2);
         this.direction = Direction.S;
-        this.animationManager = new AnimationManager(spriteLibrary.getUnit("dave"));
-        effects = new ArrayList<>();
-        action = Optional.empty();
-        this.collisionBoxSize = new Size(16, 28);
+        this.animationManager = new AnimationManager(spriteLibrary.getSpriteSets("dave"));
+        this.collisionBoxSize = new Size(size.getWidth(), size.getHeight());
     }
 
     @Override
     public void update(State state) {
-        handleAction(state);
+        motion.update(entityController);
         handleMotion();
         animationManager.update(direction);
-        effects.forEach(effect -> effect.update(state, this));
 
         handleCollisions(state);
         manageDirection();
-        decideAnimation();
+        animationManager.playAnimation(decideAnimation());
 
         position.apply(motion);
-
-        cleanUp();
     }
 
     private void handleCollisions(State state) {
@@ -61,38 +49,9 @@ public abstract class MovingEntity extends GameObject {
 
     protected abstract void handleCollision(GameObject other);
 
-    private void handleMotion() {
-        if (!action.isPresent()) {
-            motion.update(controller);            
-        }
-        else {
-            motion.stop(true, true);
-        }
-    }
-
-    private void handleAction(State state) {
-        if (action.isPresent()) {
-            action.get().update(state, this);
-        }
-    }
-
-    private void cleanUp() {
-        if (action.isPresent() && action.get().isDone()) {
-            action = Optional.empty();
-        }
-    }
+    protected abstract void handleMotion();
     
-    private void decideAnimation() {
-        if (action.isPresent()) {
-            animationManager.playAnimation(action.get().getAnimationName());
-        } else {
-            if (motion.isMoving()) {
-                animationManager.playAnimation("walk");
-            } else {
-                animationManager.playAnimation("stand");
-            }
-        }
-    }
+    protected abstract String decideAnimation();
 
     private void manageDirection() {
         if (motion.isMoving()) {
@@ -101,14 +60,10 @@ public abstract class MovingEntity extends GameObject {
     }
 
     @Override
-    public boolean collidesWith(GameObject other) {
-        return getCollisionBox().collidesWith(other.getCollisionBox());
-    }
-
-    @Override
     public CollisionBox getCollisionBox() {
-        Position positionWithMotion = Position.copyOf(position);
-        positionWithMotion.apply(motion);
+        Position positionWithMotion = Position.copyOf(getPosition());
+        positionWithMotion.apply(motion); // this is to avoid collisionbox overlapping by calculating where the NPC's collisionbox will be before commiting
+        positionWithMotion.subtract(collisionBoxOffset);
         return new CollisionBox (
             new Rectangle(
                 positionWithMotion.intX(),
@@ -124,22 +79,15 @@ public abstract class MovingEntity extends GameObject {
         return animationManager.getSprite();
     }    
 
-    public IController getController() {
-        return controller;
-    }
-
-    public void perform(Action action){
-        this.action = Optional.of(action);
-    }
-
-    public void addEffect(Effect effect) {
-        effects.add(effect);
+    public IEntityController getEntityController() {
+        return entityController;
     }
 
     public boolean willCollideX(GameObject other) {
         CollisionBox otherBox = other.getCollisionBox();
         Position positionWithXApplied = Position.copyOf(position);
         positionWithXApplied.applyX(motion);
+        positionWithXApplied.subtract(collisionBoxOffset);
 
         return CollisionBox.of(positionWithXApplied, collisionBoxSize).collidesWith(otherBox);
     }
@@ -148,6 +96,7 @@ public abstract class MovingEntity extends GameObject {
         CollisionBox otherBox = other.getCollisionBox();
         Position positionWithYApplied = Position.copyOf(position);
         positionWithYApplied.applyY(motion);
+        positionWithYApplied.subtract(collisionBoxOffset);
 
         return CollisionBox.of(positionWithYApplied, collisionBoxSize).collidesWith(otherBox);
     }

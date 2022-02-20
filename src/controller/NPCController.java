@@ -2,7 +2,7 @@ package controller;
 
 import core.Position;
 
-public class NPCController implements IController {
+public class NPCController implements IEntityController {
 
     private boolean up;
     private boolean right;

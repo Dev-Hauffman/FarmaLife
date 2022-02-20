@@ -1,16 +1,17 @@
 package entity;
 
 import ai.AIManager;
-import controller.IController;
-import game.state.State;
+import controller.IEntityController;
+import entity.humanoid.Humanoid;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
+import state.State;
 
-public class NPC extends MovingEntity {
+public class NPC extends Humanoid {
     private AIManager aiManager;
-    public NPC(IController controller, SpriteLibrary spriteLibrary) {
+    public NPC(IEntityController controller, SpriteLibrary spriteLibrary) {
         super(controller, spriteLibrary);
-        animationManager = new AnimationManager(spriteLibrary.getUnit("matt"));
+        animationManager = new AnimationManager(spriteLibrary.getSpriteSets("matt"));
         aiManager = new AIManager();
     }
     

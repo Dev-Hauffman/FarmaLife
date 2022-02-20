@@ -6,8 +6,10 @@
 package display;
 
 import javax.swing.JFrame;
-import game.state.State;
+
 import input.Input;
+import state.State;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
@@ -26,6 +28,8 @@ public class Display extends JFrame{
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width,height));
         canvas.setFocusable(false);
+        canvas.addMouseListener(input);
+        canvas.addMouseMotionListener(input);
         add(canvas);
         addKeyListener(input);
         pack();

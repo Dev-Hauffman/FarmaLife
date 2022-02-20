@@ -7,7 +7,7 @@ import ai.AITransition;
 import controller.NPCController;
 import core.Position;
 import entity.NPC;
-import game.state.State;
+import state.State;
 
 public class Wander extends AIState{
     private List<Position> targets;
@@ -28,7 +28,7 @@ public class Wander extends AIState{
             targets.add(state.getRandomPosition());
         }
 
-        NPCController controller = (NPCController) currentCharacter.getController();
+        NPCController controller = (NPCController) currentCharacter.getEntityController();
         controller.moveToTarget(targets.get(0), currentCharacter.getPosition());
 
         if (arrived(currentCharacter)) {

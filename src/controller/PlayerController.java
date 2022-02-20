@@ -6,7 +6,7 @@ package controller;
 import java.awt.event.KeyEvent;
 import input.Input;
 
-public class PlayerController implements IController{
+public class PlayerController implements IEntityController{
 
     private Input input;
     

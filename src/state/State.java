@@ -1,4 +1,4 @@
-package game.state;
+package state;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -6,18 +6,24 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import audio.AudioPlayer;
 import core.Position;
 import core.Size;
 import display.Camera;
 import entity.GameObject;
 import entity.MovingEntity;
+import game.Game;
 import game.Time;
+import game.settings.GameSettings;
 import gfx.SpriteLibrary;
 import input.Input;
 import map.GameMap;
 import ui.UIContainer;
 
-public abstract class State {    
+public abstract class State {  
+    
+    protected GameSettings gameSettings;
+    protected AudioPlayer audioPlayer;
     protected List<GameObject> gameObjects;
     protected List<UIContainer> uiContainers;
     protected SpriteLibrary spriteLibrary;
@@ -26,8 +32,15 @@ public abstract class State {
     protected Camera camera;
     protected Time time;
 
-    public State(Size windowSize, Input input) {
+    protected Size windowSize;
+
+    private State nextState;
+
+    public State(Size windowSize, Input input, GameSettings gameSettings) {
+        this.gameSettings = gameSettings;
+        this.windowSize = windowSize;
         this.input = input;
+        audioPlayer = new AudioPlayer(gameSettings.getAudioSettings());
         gameObjects =  new ArrayList<>();
         uiContainers = new ArrayList<>();
         spriteLibrary = new SpriteLibrary();
@@ -35,15 +48,33 @@ public abstract class State {
         time = new Time();
     }
 
-    public void update() {
+    public void update(Game game) {
+        audioPlayer.update();
+        time.update();
         sortObjectByPosition();
-        gameObjects.forEach(gameObject -> gameObject.update(this));
-        uiContainers.forEach(uiContainers -> uiContainers.update(this));
+        updateGameObjects();
+        List.copyOf(uiContainers).forEach(uiContainers -> uiContainers.update(this));
         camera.update(this);
+        handleMouseInput();
+
+        if (nextState != null) {
+            game.enterState(nextState);
+        }
+    }
+
+    private void handleMouseInput() {
+
+        input.clearMouseClick();
+    }
+
+    private void updateGameObjects() {
+        for (int i = 0; i < gameObjects.size(); i++) {
+            gameObjects.get(i).update(this);
+        }
     }
 
     private void sortObjectByPosition() {
-        gameObjects.sort(Comparator.comparing(gameObject -> gameObject.getPosition().getY()));
+        gameObjects.sort(Comparator.comparing(GameObject::getRenderOrder).thenComparing(gameObject -> gameObject.getPosition().getY()));
     }
 
     public List<GameObject> getGameObject() {
@@ -73,6 +104,26 @@ public abstract class State {
 
     public List<UIContainer> getUiContainers() {
         return uiContainers;
-    }    
+    }
 
+    public SpriteLibrary getSpriteLibrary() {
+        return spriteLibrary;
+    }
+    
+    public void spawn (GameObject gameObject) {
+        gameObjects.add(gameObject);
+    }
+
+    public Input getInput() {
+        return input;
+    }
+
+    public void setNextState(State nextState) {
+        this.nextState = nextState;
+    }
+
+    public GameSettings getGameSettings() {
+        return gameSettings;
+    }
+    
 }

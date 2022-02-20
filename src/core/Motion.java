@@ -1,6 +1,6 @@
 package core;
 
-import controller.IController;
+import controller.IEntityController;
 
 public class Motion {
     private Vector2D vector;
@@ -11,7 +11,7 @@ public class Motion {
         this.vector = new Vector2D(0, 0);
     }
     
-    public void update(IController controller) {
+    public void update(IEntityController controller) {
         int deltaX = 0;
         int deltaY = 0;
 

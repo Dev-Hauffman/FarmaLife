@@ -1,7 +1,7 @@
-package entity.effect;
+package entity.humanoid.effect;
 
-import entity.MovingEntity;
-import game.state.State;
+import entity.humanoid.Humanoid;
+import state.State;
 
 public abstract class Effect {
     private int lifeSpanInUpdates;
@@ -10,7 +10,7 @@ public abstract class Effect {
         this.lifeSpanInUpdates = lifeSpanInUpdates;
     }
 
-    public void update(State state, MovingEntity entity) {
+    public void update(State state, Humanoid humanoid) {
         lifeSpanInUpdates--;
     }
 

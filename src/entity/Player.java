@@ -1,18 +1,17 @@
 package entity;
 
-import controller.IController;
+import controller.IEntityController;
+import entity.humanoid.Humanoid;
 import gfx.SpriteLibrary;
 
-public class Player extends MovingEntity{
+public class Player extends Humanoid{
 
-    public Player(IController controller, SpriteLibrary spriteLibrary){
+    public Player(IEntityController controller, SpriteLibrary spriteLibrary){
         super(controller, spriteLibrary);
     }
 
     @Override
     protected void handleCollision(GameObject other) {
-        // TODO Auto-generated method stub
-        
     }
     
 }

@@ -14,15 +14,21 @@ public class AnimationManager {
     private int updatesPerFrame; // determine how many frames a sprite lives
     private int currentFrameTime;  // a counter to tell how long a sprite has already lived
     private int frameIndex; // tells which frame(sprite?) we're on
+    private boolean looping;
 
     private int directionIndex;
 
     public AnimationManager(SpriteSet spriteSet) {
+        this(spriteSet, true);
+    }
+
+    public AnimationManager(SpriteSet spriteSet, boolean looping) {
         this.spriteSet = spriteSet;
         this.updatesPerFrame = 20;
         this.frameIndex = 0;
         this.currentFrameTime = 0;
         this.directionIndex = 0;
+        this.looping = looping;
         currentAnimationName = "";
         playAnimation("stand");
     }
@@ -42,16 +48,16 @@ public class AnimationManager {
         if (currentFrameTime >= updatesPerFrame) {
             currentFrameTime = 0;
             frameIndex++;
-
-            if (frameIndex >= currentAnimationSheet.getWidth() / Game.SPRITE_SIZE) {
-                frameIndex = 0;
+            int animationSize = currentAnimationSheet.getWidth() / Game.SPRITE_SIZE;
+            if (frameIndex >= animationSize) {
+                frameIndex = looping ? 0 : animationSize - 1;
             }
         }
     }
 
     public void playAnimation(String name) {
         if (!name.equals(currentAnimationName)) {
-            this.currentAnimationSheet = (BufferedImage) spriteSet.get(name);
+            this.currentAnimationSheet = (BufferedImage) spriteSet.getOrGetDefault(name);
             currentAnimationName = name;
             frameIndex = 0;
         }

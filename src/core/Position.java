@@ -59,4 +59,21 @@ public class Position {
     public void applyY(Motion motion) {
         x += motion.getVector().getY();
     }
+
+    public void add(Position position) {
+        x += position.getX();
+        y += position.getY();
+    }
+
+    public void subtract(Position position) {
+        x -= position.getX();
+        y -= position.getY();
+    }
+
+    public double distanceTo(Position other) {
+        double deltaX = this.getX() - other.getX();
+        double deltaY = this.getY() - other.getY();
+
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
 }

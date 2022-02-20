@@ -7,8 +7,8 @@ import java.util.List;
 
 import core.Position;
 import core.Size;
-import game.state.State;
 import gfx.ImageUtils;
+import state.State;
 
 public abstract class UIContainer extends UIComponent{
 
@@ -18,6 +18,8 @@ public abstract class UIContainer extends UIComponent{
 
     protected Alignment alignment;
     protected Size windowSize;
+
+    protected Size fixedSize;
 
     public UIContainer(Size windowSize) {
         super();
@@ -37,10 +39,12 @@ public abstract class UIContainer extends UIComponent{
 
     private void calculateSize() {
         Size calculatedContentSize = calculateContentSize();
-        size = new Size(
-            padding.getHorizontal() + calculatedContentSize.getWidth(),
-            padding.getVertical() + calculatedContentSize.getHeight()
-        );
+        size = fixedSize != null 
+            ? fixedSize 
+            : new Size(
+                padding.getHorizontal() + calculatedContentSize.getWidth(),
+                padding.getVertical() + calculatedContentSize.getHeight()
+            );
     }
 
     private void calculatePosition() {        
@@ -60,12 +64,15 @@ public abstract class UIContainer extends UIComponent{
             y = windowSize.getHeight() - size.getHeight() - margin.getBottom();
         }
 
-        this.position = new Position(x, y);
+        this.relativePosition = new Position(x, y);
+        if (parent == null) {
+            this.absolutePosition = new Position(x, y);
+        }
         calculateContentPosition();
     }
     
     @Override
-    public Image getSprite() {
+    public Image getSprite() {  
         BufferedImage image = (BufferedImage) ImageUtils.createCompatibleImage(size, ImageUtils.ALPHA_BITMASKED);
         Graphics2D graphics = image.createGraphics();
 
@@ -75,8 +82,8 @@ public abstract class UIContainer extends UIComponent{
         for (UIComponent uiComponent : children) {
             graphics.drawImage(
                 uiComponent.getSprite(),
-                uiComponent.getPosition().intX(),
-                uiComponent.getPosition().intY(),
+                uiComponent.getRelativePosition().intX(),
+                uiComponent.getRelativePosition().intY(),
                 null
             );
         }
@@ -94,6 +101,7 @@ public abstract class UIContainer extends UIComponent{
 
     public void addUIComponent(UIComponent uiComponent) {
         children.add(uiComponent);
+        uiComponent.setParent(this);
     }
 
     public void setBackgroundColor(Color color) {
@@ -103,5 +111,11 @@ public abstract class UIContainer extends UIComponent{
     public void setAlignment(Alignment alignment) {
         this.alignment = alignment;
     }
+
+    public void setFixedSize(Size fixedSize) {
+        this.fixedSize = fixedSize;
+    }
+
+    
     
 }

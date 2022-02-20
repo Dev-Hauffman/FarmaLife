@@ -3,8 +3,8 @@ import java.awt.*;
 
 import core.Position;
 import game.Game;
-import game.state.State;
 import map.GameMap;
+import state.State;
 
 public class Renderer {
     public void render(State state, Graphics graphics) {
@@ -16,8 +16,8 @@ public class Renderer {
     private void renderUI(State state, Graphics graphics) {
         state.getUiContainers().forEach(uiContainer -> graphics.drawImage(
                 uiContainer.getSprite(),
-                uiContainer.getPosition().intX(),
-                uiContainer.getPosition().intY(),
+                uiContainer.getRelativePosition().intX(),
+                uiContainer.getRelativePosition().intY(),
                 null
             )
         );
@@ -28,9 +28,9 @@ public class Renderer {
         state.getGameObject().stream()
             .filter(gameObject -> camera.isInView(gameObject))
             .forEach(gameObject -> graphics.drawImage(
-                gameObject.getSprite(), 
-                gameObject.getPosition().intX() - camera.getPosition().intX() - gameObject.getSize().getWidth() / 2,
-                gameObject.getPosition().intY() - camera.getPosition().intY() - gameObject.getSize().getHeight() / 2, 
+                gameObject.getSprite(),
+                gameObject.getRenderPosition(camera).intX(),
+                gameObject.getRenderPosition(camera).intY(), 
                 null
             )
         );        

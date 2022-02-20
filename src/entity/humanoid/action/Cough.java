@@ -1,8 +1,8 @@
-package entity.action;
+package entity.humanoid.action;
 
-import entity.MovingEntity;
+import entity.humanoid.Humanoid;
 import game.GameLoop;
-import game.state.State;
+import state.State;
 
 public class Cough extends Action{
 
@@ -13,7 +13,7 @@ public class Cough extends Action{
     }
 
     @Override
-    public void update(State state, MovingEntity entity) {
+    public void update(State state, Humanoid performer) {
         lifeSpanInSeconds--;
     }
 

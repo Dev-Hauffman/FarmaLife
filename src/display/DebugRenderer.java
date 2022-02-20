@@ -1,7 +1,8 @@
 package display;
 
 import core.CollisionBox;
-import game.state.State;
+import state.State;
+
 import java.awt.*;
 
 public class DebugRenderer {

@@ -25,7 +25,7 @@ public class GameLoop implements Runnable {
         while(running){
             currentTime = System.currentTimeMillis();
             double lastRenderTimeInSeconds = (currentTime - lastUpdate) / 1000d;
-            accumulator += lastRenderTimeInSeconds;
+            accumulator += lastRenderTimeInSeconds * game.getSettings().getGameSpeedMultiplier();
             lastUpdate = currentTime;
 
             if (accumulator >= updateRate) {
@@ -33,8 +33,8 @@ public class GameLoop implements Runnable {
                     update();
                     accumulator -= updateRate;
                 }
-                render();
             }
+            render();
             printStats();                
         }
     }

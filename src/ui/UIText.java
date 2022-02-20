@@ -4,8 +4,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import core.Size;
-import game.state.State;
 import gfx.ImageUtils;
+import state.State;
 
 public class UIText extends UIComponent {
 
@@ -28,7 +28,7 @@ public class UIText extends UIComponent {
         this.fontFamily = "Helvetica";
         this.color = Color.WHITE;
 
-        this.dropShadow = true;
+        this.dropShadow = false;
         this.dropShadowOffset = 2;
         this.shadowColor = new Color(140, 140, 140);
     }
@@ -60,14 +60,39 @@ public class UIText extends UIComponent {
 
     private void calculateSize() {
         FontMetrics fontMetrics = new Canvas().getFontMetrics(font);
-        size = new Size(
-            fontMetrics.stringWidth(text) + padding.getHorizontal(),
-            fontMetrics.getHeight() + padding.getVertical()
-        );
+        int width = fontMetrics.stringWidth(text) + padding.getHorizontal();
+        int height = fontMetrics.getHeight() + padding.getVertical();
+
+        if(dropShadow) {
+            width += dropShadowOffset;
+        }
+        /*
+        * This if is here because if the update happens before the rendering, there will be problems with the createCompatibleImage
+        * method call, because it doesn't accept values below or equal to 0, considering that the string size is 0
+        */
+        if (width <= 0) {
+            width = 1;
+        }
+
+        if (height <= 0) {
+            height = 1;
+        }
+
+        size = new Size(width, height);
     }
 
     private void createFont() {
         font = new Font(fontFamily, fontStyle, fontSize);
     }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    
     
 }
