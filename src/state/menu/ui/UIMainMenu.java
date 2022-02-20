@@ -16,7 +16,7 @@ public class UIMainMenu extends VerticalContainer{
 
         addUIComponent(new UIText("FarmaLife"));
         addUIComponent(new UIButton("PLAY", (state) -> state.setNextState(new GameState(windowSize, state.getInput(), state.getGameSettings()))));
-        addUIComponent(new UIButton("OPTIONS", (state) -> ((MenuState)state).enterMenu(new UIOptionMenu(windowSize))));
+        addUIComponent(new UIButton("OPTIONS", (state) -> ((MenuState)state).enterMenu(new UIOptionMenu(windowSize, state.getGameSettings()))));
         addUIComponent(new UIButton("EXIT", (state) -> System.exit(0)));
     }
     

@@ -19,7 +19,7 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
     public Input() {
         toggled = new boolean[525];
         pressed = new boolean[525];
-        mousePosition = new Position(0, 0);
+        mousePosition = new Position(-1, -1);
     }
     /*
     * This methods makes the game check only once for input, if you press the key once to call a method on a single update, it'll call

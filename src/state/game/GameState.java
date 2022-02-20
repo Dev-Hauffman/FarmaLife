@@ -25,7 +25,7 @@ public class GameState extends State {
 
     public GameState(Size windowSize, Input input, GameSettings gameSettings) {
         super(windowSize, input, gameSettings);
-        gameMap = new GameMap(new Size(20, 20), spriteLibrary);
+        gameMap = new GameMap(new Size(15, 10), spriteLibrary);
         playing = true;
         initializeCharacters();
         initializeUI(windowSize);
@@ -46,7 +46,7 @@ public class GameState extends State {
         gameObjects.add(player);
         camera.focusOn(player);
 
-        initializeNPC(100);
+        initializeNPC(50);
     }
 
     private void initializeNPC(int numberOfNPCs) {

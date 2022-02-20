@@ -6,8 +6,8 @@ public class AudioSettings {
     private float soundVolume;
 
     public AudioSettings() {
-        musicVolume = 1;
-        soundVolume = 1;
+        musicVolume = 0.8f;
+        soundVolume = 0.75f;
     }
 
     public float getMusicVolume() {

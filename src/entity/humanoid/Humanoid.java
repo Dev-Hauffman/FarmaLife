@@ -5,6 +5,7 @@ import entity.GameObject;
 import entity.MovingEntity;
 import entity.humanoid.action.Action;
 import entity.humanoid.effect.Effect;
+import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import state.State;
 import core.Position;
@@ -13,9 +14,11 @@ import core.Size;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Humanoid extends MovingEntity {
     
+    private static List<String> availableCharacters = new ArrayList<>(List.of("dave", "matt", "melissa", "roger"));
     protected Optional<Action> action;
     protected List<Effect> effects;
 
@@ -25,9 +28,16 @@ public class Humanoid extends MovingEntity {
         effects = new ArrayList<>();
         action = Optional.empty();
 
+        this.animationManager = new AnimationManager(spriteLibrary.getSpriteSets(getRandomCharacter()));
+
         this.collisionBoxSize = new Size(16, 28);
         this.renderOffset = new Position(size.getWidth() / 2, size.getHeight() - 12);
         this.collisionBoxOffset = new Position(collisionBoxSize.getWidth() / 2, collisionBoxSize.getHeight());
+    }
+
+    private String getRandomCharacter() {
+        Collections.shuffle(availableCharacters);
+        return availableCharacters.get(0);
     }
 
     @Override

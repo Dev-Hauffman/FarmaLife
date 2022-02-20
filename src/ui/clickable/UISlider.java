@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import core.Size;
 import gfx.ImageUtils;
 import state.State;
+import ui.Spacing;
 
 public class UISlider extends UIClickable{
 
@@ -18,12 +19,11 @@ public class UISlider extends UIClickable{
         this.max = max;
         this.value = max;
         this.size = new Size(360, 10);
+        this.margin = new Spacing(0, 0, 15, 0);
     }
 
     @Override
-    protected void onClick(State state) {
-        this.value = getValueAt(state.getInput().getMousePosition().getX());
-    }
+    protected void onClick(State state) {}
 
     private double getValueAt(double xPosition) {
         double positionOnSlider = xPosition - absolutePosition.getX();
@@ -59,6 +59,14 @@ public class UISlider extends UIClickable{
 
     public void setValue(double value) {
         this.value = value;
+    }
+
+    @Override
+    protected void onFocus(State state) {}
+
+    @Override
+    protected void onDrag(State state) {
+        this.value = getValueAt(state.getInput().getMousePosition().getX());
     }
     
 }

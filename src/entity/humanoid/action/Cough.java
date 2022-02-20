@@ -26,5 +26,10 @@ public class Cough extends Action{
     public String getAnimationName() {
         return "cough";
     }
+
+    @Override
+    public String getSoundName() {
+        return null;
+    }
     
 }

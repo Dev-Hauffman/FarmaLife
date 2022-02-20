@@ -48,7 +48,7 @@ public abstract class UIContainer extends UIComponent{
     }
 
     private void calculatePosition() {        
-        int x = padding.getLeft();
+        int x = margin.getLeft();
         if (alignment.getHorizontal().equals(Alignment.Position.CENTER)) {
             x = windowSize.getWidth() / 2 - size.getWidth() / 2;
         }
@@ -56,7 +56,7 @@ public abstract class UIContainer extends UIComponent{
             x = windowSize.getWidth() - size.getWidth() - margin.getRight();
         }
 
-        int y = padding.getTop();
+        int y = margin.getTop();
         if (alignment.getVertical().equals(Alignment.Position.CENTER)) {
             y = windowSize.getHeight() / 2 - size.getHeight() / 2;
         }
