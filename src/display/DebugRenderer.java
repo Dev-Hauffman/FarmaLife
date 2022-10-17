@@ -18,8 +18,8 @@ public class DebugRenderer {
     private void drawCollisionBox(CollisionBox collisionBox, Graphics graphics, Camera camera) {
         graphics.setColor(Color.RED);
         graphics.drawRect(
-            (int) collisionBox.getBounds().getX() - camera.getPosition().intX(),
-            (int) collisionBox.getBounds().getY() - camera.getPosition().intY(),
+            (int) collisionBox.getBounds().getX() - camera.getPosition().getIntX(),
+            (int) collisionBox.getBounds().getY() - camera.getPosition().getIntY(),
             (int) collisionBox.getBounds().getWidth(),
             (int) collisionBox.getBounds().getHeight()
         );

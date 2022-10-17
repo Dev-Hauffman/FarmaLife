@@ -1,4 +1,4 @@
-package map;
+package gamespace.map;
 
 import java.awt.*;
 

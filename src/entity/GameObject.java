@@ -14,7 +14,8 @@ public abstract class GameObject {
     protected Position position;
     protected Position renderOffset;
     protected Position collisionBoxOffset;
-    protected Size size;
+    protected Size size;    
+    protected Size collisionBoxSize;
 
     protected int renderOrder;
 
@@ -22,9 +23,10 @@ public abstract class GameObject {
 
     public GameObject() {
         position = new Position(0, 0);
+        size = new Size(64, 64);
         renderOffset = new Position(0, 0);
         collisionBoxOffset = new Position(0, 0);
-        size = new Size(64, 64);
+        this.collisionBoxSize = new Size(size.getWidth(), size.getHeight());
         renderOrder = 5;
     }
 
@@ -32,9 +34,11 @@ public abstract class GameObject {
 
     public abstract Image getSprite();
 
-    public abstract CollisionBox getCollisionBox();
+    public CollisionBox getCollisionBox() {
+        return new CollisionBox(new Rectangle());
+    }
 
-    public boolean collidesWith(GameObject other) {
+    public boolean doesCollidesWith(GameObject other) {
         return getCollisionBox().collidesWith(other.getCollisionBox());
     }
 

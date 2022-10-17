@@ -2,6 +2,8 @@ package display;
 
 import java.util.Optional;
 
+import controller.IEntityController;
+import core.Motion;
 import core.Position;
 import core.Size;
 import entity.GameObject;
@@ -14,6 +16,8 @@ public class Camera {
     private static final int SAFETY_SPACE = 2 * Game.SPRITE_SIZE;
     private Position position;
     private Size windowSize;
+    private Motion motion;
+    private IEntityController entityController;
 
     private Rectangle viewBounds;
 
@@ -21,6 +25,17 @@ public class Camera {
 
     public Camera(Size windowSize) {
         this.position = new Position(0, 0);
+        this.entityController = null;
+        this.motion =  new Motion(2);
+        this.windowSize = windowSize;
+        this.objectWithFocus = Optional.empty();
+        calculateViewBounds();
+    }
+
+    public Camera(Size windowSize, IEntityController controller) {
+        this.position = new Position(0, 0);
+        this.entityController = controller;
+        this.motion =  new Motion(5);
         this.windowSize = windowSize;
         this.objectWithFocus = Optional.empty();
         calculateViewBounds();
@@ -28,8 +43,8 @@ public class Camera {
 
     private void calculateViewBounds() {
         viewBounds = new Rectangle(
-            position.intX(),
-            position.intY(),
+            position.getIntX(),
+            position.getIntY(),
             windowSize.getWidth() + SAFETY_SPACE,
             windowSize.getHeight() + SAFETY_SPACE
         );
@@ -44,9 +59,11 @@ public class Camera {
             Position objectPosition = objectWithFocus.get().getPosition();
             this.position.setX(objectPosition.getX() - windowSize.getWidth() / 2);
             this.position.setY(objectPosition.getY() - windowSize.getHeight() / 2);
-            
-            clampWithinBounds(state);
+        }else if (entityController != null) {
+            motion.update(entityController);
+            apply(motion);
         }
+        clampWithinBounds(state);
         calculateViewBounds();
     }
 
@@ -58,13 +75,21 @@ public class Camera {
         if (position.getY() < 0) {
             position.setY(0);
         }
-
-        if (position.getX() + windowSize.getWidth() > state.getGameMap().getWidth() && state.getGameMap().getWidth() > windowSize.getWidth()) {
-            position.setX(state.getGameMap().getWidth() - windowSize.getWidth());
+        // checking if the right border of the screen is beyond the gamespace right border, considering that the right border of the gamespace is biger than the screen width (or right border)
+        if (position.getX() + windowSize.getWidth() > state.getGameSpace().getWidth() && state.getGameSpace().getWidth() > windowSize.getWidth()) {
+            position.setX(state.getGameSpace().getWidth() - windowSize.getWidth());
+        }
+        // does not allow the camera to move on the x axis if the gamespace if shorter than the screen size
+        if (state.getGameSpace().getWidth() < windowSize.getWidth()) {
+            position.setX(0);
         }
 
-        if (position.getY() + windowSize.getHeight() > state.getGameMap().getHeight() && state.getGameMap().getHeight() > windowSize.getHeight()) {
-            position.setY(state.getGameMap().getHeight() - windowSize.getHeight());
+        if (position.getY() + windowSize.getHeight() > state.getGameSpace().getHeight() && state.getGameSpace().getHeight() > windowSize.getHeight()) {
+            position.setY(state.getGameSpace().getHeight() - windowSize.getHeight());
+        }
+
+        if (state.getGameSpace().getHeight() < windowSize.getHeight()) {
+            position.setY(0);
         }
     }
 
@@ -74,8 +99,8 @@ public class Camera {
 
     public boolean isInView(GameObject gameObject) {
         return viewBounds.intersects(
-            gameObject.getPosition().intX(),
-            gameObject.getPosition().intY(),
+            gameObject.getPosition().getIntX(),
+            gameObject.getPosition().getIntY(),
             gameObject.getSize().getWidth(),
             gameObject.getSize().getHeight()
         );
@@ -83,5 +108,10 @@ public class Camera {
 
     public Size getSize() {
         return windowSize;
-    }    
+    }
+
+    public void apply(Motion motion) {
+        position.apply(motion);
+    }
+
 }

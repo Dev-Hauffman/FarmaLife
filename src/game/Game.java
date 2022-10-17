@@ -12,7 +12,6 @@ import display.Display;
 import game.settings.GameSettings;
 import input.Input;
 import state.State;
-import state.game.GameState;
 import state.menu.MenuState;
 
 public class Game {

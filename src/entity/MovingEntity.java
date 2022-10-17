@@ -27,7 +27,6 @@ public abstract class MovingEntity extends GameObject {
         this.motion =  new Motion(2);
         this.direction = Direction.S;
         this.animationManager = new AnimationManager(spriteLibrary.getSpriteSets("dave"));
-        this.collisionBoxSize = new Size(size.getWidth(), size.getHeight());
     }
 
     @Override
@@ -65,8 +64,8 @@ public abstract class MovingEntity extends GameObject {
         positionWithMotion.subtract(collisionBoxOffset);
         return new CollisionBox (
             new Rectangle(
-                positionWithMotion.intX(),
-                positionWithMotion.intY(),
+                positionWithMotion.getIntX(),
+                positionWithMotion.getIntY(),
                 collisionBoxSize.getWidth(),
                 collisionBoxSize.getHeight()
             )

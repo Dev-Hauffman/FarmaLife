@@ -1,4 +1,4 @@
-package map;
+package gamespace.map;
 
 import java.util.Arrays;
 
@@ -6,9 +6,10 @@ import core.Position;
 import core.Size;
 import display.Camera;
 import game.Game;
+import gamespace.IGameSpace;
 import gfx.SpriteLibrary;
 
-public class GameMap {
+public class GameMap implements IGameSpace {
 
     private static final int SAFETY_SPACE = 2;
 

@@ -9,8 +9,8 @@ import entity.NPC;
 import entity.Player;
 import entity.humanoid.effect.Sick;
 import game.settings.GameSettings;
+import gamespace.map.GameMap;
 import input.Input;
-import map.GameMap;
 import state.State;
 import state.game.ui.UIGameTime;
 import ui.HorizontalContainer;
@@ -25,7 +25,7 @@ public class GameState extends State {
 
     public GameState(Size windowSize, Input input, GameSettings gameSettings) {
         super(windowSize, input, gameSettings);
-        gameMap = new GameMap(new Size(15, 10), spriteLibrary);
+        gameSpace = new GameMap(new Size(15, 10), spriteLibrary);
         playing = true;
         initializeCharacters();
         initializeUI(windowSize);
@@ -52,7 +52,7 @@ public class GameState extends State {
     private void initializeNPC(int numberOfNPCs) {
         for (int i = 0; i < numberOfNPCs; i++) {
             NPC npc = new NPC(new NPCController(), spriteLibrary);
-            npc.setPosition(gameMap.getRandomPosition());
+            npc.setPosition(gameSpace.getRandomPosition());
             npc.addEffect(new Sick());
             gameObjects.add(npc);
         }

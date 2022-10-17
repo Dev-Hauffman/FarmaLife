@@ -19,7 +19,7 @@ public class AnimationManager {
     private int directionIndex;
 
     public AnimationManager(SpriteSet spriteSet) {
-        this(spriteSet, true);
+        this(spriteSet, false);
     }
 
     public AnimationManager(SpriteSet spriteSet, boolean looping) {
@@ -30,7 +30,11 @@ public class AnimationManager {
         this.directionIndex = 0;
         this.looping = looping;
         currentAnimationName = "";
-        playAnimation("stand");
+        // playAnimation("stand");
+    }
+
+    public Image getDefaultSprite() {
+        return null;
     }
 
     public Image getSprite() {

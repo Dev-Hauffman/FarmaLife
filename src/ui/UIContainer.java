@@ -12,6 +12,7 @@ import state.State;
 
 public abstract class UIContainer extends UIComponent{
 
+    protected boolean centerChildren;
     protected Color backgroundColor;
 
     protected List<UIComponent> children;
@@ -24,6 +25,7 @@ public abstract class UIContainer extends UIComponent{
     public UIContainer(Size windowSize) {
         super();
         this.windowSize = windowSize;
+        centerChildren = false;
         alignment = new Alignment(Alignment.Position.END, Alignment.Position.START);
         backgroundColor = Color.RED;
         margin = new Spacing(5);
@@ -82,8 +84,8 @@ public abstract class UIContainer extends UIComponent{
         for (UIComponent uiComponent : children) {
             graphics.drawImage(
                 uiComponent.getSprite(),
-                uiComponent.getRelativePosition().intX(),
-                uiComponent.getRelativePosition().intY(),
+                uiComponent.getRelativePosition().getIntX(),
+                uiComponent.getRelativePosition().getIntY(),
                 null
             );
         }
@@ -116,6 +118,8 @@ public abstract class UIContainer extends UIComponent{
         this.fixedSize = fixedSize;
     }
 
-    
+    public void setCenterChildren(boolean centerChildren) {
+        this.centerChildren = centerChildren;
+    }    
     
 }

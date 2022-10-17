@@ -20,7 +20,10 @@ public class SpriteLibrary {
 
     private void loadSpriteFromDisk() {
         loadSpriteSets("/sprites/units");
+        loadImages("/sprites/fonts");
         loadImages("/sprites/units");
+        loadImages("/sprites/scenery");
+        loadImages("/sprites/bodyparts/body");
     }
 
     private void loadImages(String path) {

@@ -11,13 +11,14 @@ import core.Position;
 import core.Size;
 import display.Camera;
 import entity.GameObject;
-import entity.MovingEntity;
 import game.Game;
 import game.Time;
 import game.settings.GameSettings;
+import gamespace.GameSpace;
+import gamespace.IGameSpace;
 import gfx.SpriteLibrary;
 import input.Input;
-import map.GameMap;
+import text.SingleCharacter;
 import ui.UIContainer;
 
 public abstract class State {  
@@ -28,9 +29,10 @@ public abstract class State {
     protected List<UIContainer> uiContainers;
     protected SpriteLibrary spriteLibrary;
     protected Input input;
-    protected GameMap gameMap;
+    protected IGameSpace gameSpace;
     protected Camera camera;
     protected Time time;
+    protected List<SingleCharacter> text; //DELETE
 
     protected Size windowSize;
 
@@ -41,9 +43,11 @@ public abstract class State {
         this.windowSize = windowSize;
         this.input = input;
         audioPlayer = new AudioPlayer(gameSettings.getAudioSettings());
+        text = new ArrayList<>(); //DELETE
         gameObjects =  new ArrayList<>();
         uiContainers = new ArrayList<>();
         spriteLibrary = new SpriteLibrary();
+        gameSpace = new GameSpace(new Size(windowSize.getWidth(), windowSize.getHeight()));
         camera = new Camera(windowSize);
         time = new Time();
     }
@@ -81,8 +85,8 @@ public abstract class State {
         return gameObjects;
     }
 
-    public GameMap getGameMap() {
-        return gameMap;
+    public IGameSpace getGameSpace() {
+        return gameSpace;
     }
 
     public Camera getCamera() {
@@ -94,12 +98,12 @@ public abstract class State {
     }
 
     public Position getRandomPosition() {
-        return gameMap.getRandomPosition();
+        return gameSpace.getRandomPosition();
     }
 
     public List<GameObject> getCollidingGameObjects(GameObject gameObject) {
         return gameObjects.stream()
-            .filter(other -> other.collidesWith(gameObject)).collect(Collectors.toList());
+            .filter(other -> other.doesCollidesWith(gameObject)).collect(Collectors.toList());
     }
 
     public List<UIContainer> getUiContainers() {
@@ -134,4 +138,7 @@ public abstract class State {
         audioPlayer.clear();
     }    
     
+    public List<SingleCharacter> getText(){ // DELETE
+        return text;
+    }
 }

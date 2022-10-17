@@ -14,11 +14,11 @@ public class Position {
         this.y = y;
     }
 
-    public int intX() {
+    public int getIntX() {
         return (int) Math.round(x);
     }
 
-    public int intY() {
+    public int getIntY() {
         return (int) Math.round(y);
     }
 

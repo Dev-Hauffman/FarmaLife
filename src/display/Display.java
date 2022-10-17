@@ -40,9 +40,7 @@ public class Display extends JFrame{
         setVisible(true);
     }
 
-    public void update(){
-
-    }
+    public void update(){}
 
     public void render(State state, boolean debugMode) {
         BufferStrategy bufferStrategy = canvas.getBufferStrategy();

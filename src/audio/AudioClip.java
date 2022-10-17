@@ -7,10 +7,10 @@ import game.settings.AudioSettings;
 
 public abstract class AudioClip {
 
-    private final Clip clip;
+    private final Clip CLIP;
 
     public AudioClip(Clip clip) {
-        this.clip = clip;
+        this.CLIP = clip;
         clip.start();
     }
 
@@ -19,7 +19,7 @@ public abstract class AudioClip {
     }
 
     public void setVolume(AudioSettings audioSettings) {
-        final FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        final FloatControl control = (FloatControl) CLIP.getControl(FloatControl.Type.MASTER_GAIN);
         float range = control.getMaximum() - control.getMinimum();
         float gain = (range * getVolume(audioSettings)) + control.getMinimum();
         control.setValue(gain);
@@ -28,11 +28,11 @@ public abstract class AudioClip {
     protected abstract float getVolume(AudioSettings audioSettings);
 
     public boolean hasFinishedPlaying() {
-        return !clip.isRunning();
+        return !CLIP.isRunning();
     }
 
     public void cleanUp() {
-        clip.close();
+        CLIP.close();
     }
     
 }
