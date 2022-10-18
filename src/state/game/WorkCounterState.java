@@ -10,8 +10,6 @@ import game.settings.GameSettings;
 import gamespace.GameSpace;
 import input.Input;
 import state.State;
-import text.Font;
-import text.SingleCharacter;
 
 public class WorkCounterState extends State{
 
@@ -22,8 +20,6 @@ public class WorkCounterState extends State{
         super(windowSize, input, gameSettings);
         gameSpace = new GameSpace(new Size(windowSize.getWidth(), 1354));
         patient = new Patient(spriteLibrary);
-        Font font = new Font(spriteLibrary); // DELETE
-        text.add(new SingleCharacter(0, 0, 'a', "testFont", font, 0)); // DELETE
         initializeObjects();
         camera = new Camera(windowSize, new CameraController(input));
     }

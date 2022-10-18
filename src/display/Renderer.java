@@ -14,7 +14,7 @@ public class Renderer {
         }
         renderGameObjects(state, graphics);
         renderUI(state, graphics);
-        state.getText().forEach(text-> graphics.drawImage(text.getSprite(), 0, 0, null)); //DELETE
+        state.getText().getCharacterSprites().forEach(text-> graphics.drawImage(text.getSprite(), text.getPosX(), text.getPosY(), null)); //DELETE
     }
 
     private void renderUI(State state, Graphics graphics) {

@@ -18,7 +18,7 @@ import gamespace.GameSpace;
 import gamespace.IGameSpace;
 import gfx.SpriteLibrary;
 import input.Input;
-import text.SingleCharacter;
+import text.Text;
 import ui.UIContainer;
 
 public abstract class State {  
@@ -32,7 +32,7 @@ public abstract class State {
     protected IGameSpace gameSpace;
     protected Camera camera;
     protected Time time;
-    protected List<SingleCharacter> text; //DELETE
+    protected Text text; //DELETE
 
     protected Size windowSize;
 
@@ -43,10 +43,10 @@ public abstract class State {
         this.windowSize = windowSize;
         this.input = input;
         audioPlayer = new AudioPlayer(gameSettings.getAudioSettings());
-        text = new ArrayList<>(); //DELETE
         gameObjects =  new ArrayList<>();
         uiContainers = new ArrayList<>();
         spriteLibrary = new SpriteLibrary();
+        text = new Text("Another Test", spriteLibrary, "testFont", 50, 50, 64); //DELETE
         gameSpace = new GameSpace(new Size(windowSize.getWidth(), windowSize.getHeight()));
         camera = new Camera(windowSize);
         time = new Time();
@@ -138,7 +138,7 @@ public abstract class State {
         audioPlayer.clear();
     }    
     
-    public List<SingleCharacter> getText(){ // DELETE
+    public Text getText(){ // DELETE
         return text;
     }
 }
