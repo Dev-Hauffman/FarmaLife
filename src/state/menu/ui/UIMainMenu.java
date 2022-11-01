@@ -1,8 +1,8 @@
 package state.menu.ui;
 
 import core.Size;
+import state.counter.WorkCounterState;
 import state.game.GameState;
-import state.game.WorkCounterState;
 import state.menu.MenuState;
 import ui.Alignment;
 import ui.UIText;

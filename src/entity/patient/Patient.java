@@ -14,7 +14,7 @@ public class Patient {
 
     public Patient(SpriteLibrary spriteLibrary) {
         bodyParts = new HashMap<>();
-        bodyParts.put("body", new DynamicObject("default", new Size(657, 565), new Position(81, 143), spriteLibrary, 3));
+        bodyParts.put("body", new DynamicObject("default", new Size(657, 565), new Position(81, 143), spriteLibrary, 2));
     }
 
     public Map<String, GameObject> getBodyParts() {

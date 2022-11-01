@@ -32,9 +32,9 @@ public class GameLoop implements Runnable {
                 while (accumulator >= updateRate) {
                     update();
                     accumulator -= updateRate;
+                    render();
                 }
             }
-            render();
             printStats();                
         }
     }
