@@ -5,8 +5,10 @@ public class GameSettings {
     private boolean debugMode;
     private double gameSpeedMultiplier;
     private AudioSettings audioSettings;
+    public static Language language;
 
-    public GameSettings(boolean debugMode) {
+    public GameSettings(boolean debugMode, Language language) {
+        this.language = language;
         this.debugMode = debugMode;
         gameSpeedMultiplier = 1;
         audioSettings = new AudioSettings();
@@ -37,6 +39,10 @@ public class GameSettings {
 
     public AudioSettings getAudioSettings() {
         return audioSettings;
-    }    
+    }
+
+    public enum Language{
+        PORTUGUESE, ENGLISH;
+    }
     
 }
