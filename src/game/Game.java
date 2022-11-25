@@ -10,6 +10,7 @@ import controller.GameController;
 import core.Size;
 import display.Display;
 import game.settings.GameSettings;
+import game.settings.GameSettings.Language;
 import input.Input;
 import state.State;
 import state.menu.MenuState;
@@ -27,7 +28,7 @@ public class Game {
     public Game(int width, int height){
         input = new Input();
         display = new Display(width, height, input); 
-        settings = new GameSettings(true);
+        settings = new GameSettings(true, Language.PORTUGUESE);
         state = new MenuState(new Size(width, height), input, settings);
         gameController = new GameController(input);
     }
