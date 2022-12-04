@@ -21,26 +21,16 @@ public class ButtonObject extends ClickableObject{
         clickAction = clickEvent;
         spriteLibrary = state.getSpriteLibrary();
         this.clickedName = clickedButtonName;
-        this.position = position;       
+        this.position = position;
+        text = new GameText(label, state, "testFont", new Position(0, 0), 24, 7);
+        text.setPosX((sprite.getWidth(null)/2)-((text.getStringSpriteWidth())/2));
+        text.setPosY((getSprite().getHeight(null)/2) - (text.getStringSpriteHeight()/2));
+        addChildren(text);
     }
 
     public ButtonObject(String label, String unclickedButtonName, String clickedButtonName, State state, Position position, int renderOrder, GameObject parent,  IClickAction clickEvent){
         this(label, unclickedButtonName, clickedButtonName, state, position, renderOrder, clickEvent);
         parent(parent);
-        text = new GameText(label, state, "testFont", new Position(0, 0), 24, 7);
-        text.setPosX((sprite.getWidth(null)/2)-(text.getStringSpriteWidth()/2));
-        text.setPosY((getSprite().getHeight(null)/2) - (text.getStringSpriteHeight()/2));
-        addChildren(text);
-    }
-
-    @Override
-    public void update(State state) {
-        super.update(state);
-    }
-
-    @Override
-    public Image getSprite() {
-        return super.getSprite();
     }
 
     @Override
@@ -63,6 +53,26 @@ public class ButtonObject extends ClickableObject{
             clickAction.execute(state);            
         }
         disabled = true;
+    }
+
+    @Override
+    public void setPosition(Position position) {
+        for (GameObject gameObject : children) {
+            gameObject.setPosX(gameObject.getPosition().getIntX() + position.getIntX());
+            gameObject.setPosY(gameObject.getPosition().getIntY() + position.getIntY());
+        }
+        if (parent != null) {
+            position.add(new Position(parent.getPosition().getIntX(), parent.getPosition().getIntY()));
+        }
+        super.setPosition(position);
+    }
+
+    public GameText getText() {
+        return text;
+    }
+
+    public void setTextPosX(int posX){
+        text.setPosX(posX);
     }
     
 }

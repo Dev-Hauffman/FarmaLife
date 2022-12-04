@@ -14,6 +14,7 @@ import gfx.ImageUtils;
 import gfx.SpriteLibrary;
 import state.State;
 import ui.object.UIObject;
+import java.awt.Color;
 
 public class GameText extends UIObject{
     protected List<SingleCharacter> characters;
@@ -33,9 +34,11 @@ public class GameText extends UIObject{
         this.characters = new ArrayList<>();
         int spacing = fontSize/2 + (fontSize/3);
         this. spacing = spacing;
-        stringToImage(text, state.getSpriteLibrary(), fontName, spacing, fontSize, renderOrder);
-        this.size = new Size(getStringSpriteWidth(), getStringSpriteHeight());
-        loadGraphics(state.getSpriteLibrary());
+        if (text != null) {
+            stringToImage(text, state.getSpriteLibrary(), fontName, spacing, fontSize, renderOrder);            
+            this.size = new Size(getStringSpriteWidth(), getStringSpriteHeight());
+            loadGraphics(state.getSpriteLibrary());
+        }
     }
 
     private void stringToImage(String text, SpriteLibrary spriteLibrary, String fontName, int spacing, int fontSize, int renderOrder){
@@ -47,19 +50,26 @@ public class GameText extends UIObject{
 
     @Override
     public void loadGraphics(SpriteLibrary spriteLibrary) {
-        BufferedImage image = (BufferedImage) ImageUtils.createCompatibleImage(new Size(getStringSpriteWidth(), getStringSpriteHeight()), ImageUtils.ALPHA_BITMASKED);
-        Graphics2D graphics = image.createGraphics();
-        for (GameObject gameObject : characters) {
-            graphics.drawImage(
-                gameObject.getSprite(),
-                gameObject.getPosition().getIntX() - getPosition().getIntX(),
-                gameObject.getPosition().getIntY() - getPosition().getIntY(),
-                null
-            );
+        if (getStringSpriteWidth() > 0 && getStringSpriteHeight() > 0) {
+            BufferedImage image = (BufferedImage) ImageUtils.createCompatibleImage(new Size(getStringSpriteWidth(), getStringSpriteHeight()), ImageUtils.ALPHA_BITMASKED);
+            Graphics2D graphics = image.createGraphics();
+            for (GameObject gameObject : characters) {
+                graphics.drawImage(
+                    gameObject.getSprite(),
+                    gameObject.getPosition().getIntX() - getPosition().getIntX(),
+                    gameObject.getPosition().getIntY() - getPosition().getIntY(),
+                    null
+                );
+            }
+            graphics.dispose();
+            Image result = image;
+            sprite = result;
+            if (parent != null) {
+                if (parent instanceof UIObject) {
+                    ((UIObject)parent).loadGraphics(spriteLibrary);
+                }
+            }
         }
-        graphics.dispose();
-        Image result = image;
-        sprite = result;
     }
     
     @Override
@@ -71,59 +81,17 @@ public class GameText extends UIObject{
         return characters;
     }
 
-    public Position getPosition() {
-        return position;
-    }
-
     @Override
     public void parent(GameObject parent) {
         super.parent(parent);
-        for (SingleCharacter singleCharacter : characters) {
-            singleCharacter.setPosX(parent.getPosition().getIntX() + position.getIntX());
-            singleCharacter.setPosY(parent.getPosition().getIntY() + position.getIntY());
-        }
     }
 
-    public int getStringSpriteWidth(){
-        int width = 0;
-        for (SingleCharacter singleCharacter : characters) {
-            width += singleCharacter.getSpriteWidth();
-        }
-        return width;
+    public int getStringSpriteWidth(){        
+        return getCharacters().size() * getSpacing();
     }
 
     public int getStringSpriteHeight(){
         return characters.get(0).getSpriteHeight();
-    }
-
-    public void setPosX(int posX) {
-        if(parent != null){
-            this.position.setX(parent.getPosition().getIntX() + posX);
-        } else {
-            this.position.setX(posX);
-        }
-        for (SingleCharacter singleCharacter : characters) {
-            if(parent != null){
-                singleCharacter.setPosX(parent.getPosition().getIntX() + posX);
-            } else {
-                singleCharacter.setPosX(posX);
-            }
-        }
-    }
-
-    public void setPosY(int posY) {
-        if(parent != null){
-            this.position.setY(parent.getPosition().getIntX() + posY);
-        } else {
-            this.position.setY(posY);
-        }
-        for (SingleCharacter singleCharacter : characters) {
-            if(parent != null){
-                singleCharacter.setPosY(parent.getPosition().getIntY() + posY);
-            } else {
-                singleCharacter.setPosY(posY);
-            }
-        }
     }
 
     public void setText(String text) {
@@ -131,14 +99,23 @@ public class GameText extends UIObject{
         characters.clear();
         stringToImage(text, state.getSpriteLibrary(), fontName, spacing, fontSize, renderOrder);
         loadGraphics(state.getSpriteLibrary());
-        if (parent instanceof UIObject) {
-            ((UIObject)parent).loadGraphics(state.getSpriteLibrary());
-        }
     }
 
     @Override
     public void update(State state) {
         super.update(state);
-    } 
+    }
+
+    public List<SingleCharacter> getCharacters() {
+        return characters;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public int getSpacing() {
+        return spacing;
+    }
 
 }

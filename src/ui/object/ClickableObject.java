@@ -3,7 +3,7 @@ package ui.object;
 import java.awt.*;
 
 import core.Position;
-import gfx.SpriteLibrary;
+import display.Camera;
 import state.State;
 
 public abstract class ClickableObject extends UIObject{
@@ -19,7 +19,7 @@ public abstract class ClickableObject extends UIObject{
         Position mousePosition = state.getInput().getMousePosition();
         boolean previousFocus = hasFocus;
 
-        hasFocus = getBounds().contains(mousePosition.getIntX(), mousePosition.getIntY());
+        hasFocus = getBounds(state.getCamera()).contains(mousePosition.getIntX(), mousePosition.getIntY());
 
         isPressed = hasFocus && state.getInput().isMousePressed();
 
@@ -35,11 +35,6 @@ public abstract class ClickableObject extends UIObject{
             onFocus(state);
         }
         
-    }
-
-    @Override
-    public Image getSprite(){
-        return super.getSprite();
     };
 
     protected abstract void onFocus(State state);
@@ -48,10 +43,10 @@ public abstract class ClickableObject extends UIObject{
 
     protected abstract void onClick(State state);
 
-    private Rectangle getBounds() {
+    private Rectangle getBounds(Camera camera) {
         return new Rectangle(
-            getPosition().getIntX(),
-            getPosition().getIntY(),
+            getPosition().getIntX() - camera.getPosition().getIntX(),
+            getPosition().getIntY() - camera.getPosition().getIntY(),
             sprite.getWidth(null),
             sprite.getHeight(null)
         );

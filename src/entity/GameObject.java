@@ -60,7 +60,6 @@ public abstract class GameObject {
     }
 
     public void parent(GameObject parent) {
-        this.position = new Position(0, 0);
         this.parent = parent;
     }
 
@@ -81,6 +80,21 @@ public abstract class GameObject {
 
     public void setRenderOrder(int renderOrder) {
         this.renderOrder = renderOrder;
-    }    
+    }
+
+    public void setPosX(int posX) {
+        if (parent != null) {
+            this.position.setX(posX + parent.getPosition().getIntX());    
+        }
+        this.position.setX(posX);
+    }
+
+    public void setPosY(int posY) {
+        this.position.setY(posY);
+    }
+
+    public GameObject getParent() {
+        return parent;
+    }
     
 }

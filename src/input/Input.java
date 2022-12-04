@@ -4,6 +4,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import core.Position;
 
@@ -15,10 +17,14 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
 
     private boolean[] pressed;
     private boolean[] toggled;
+    private boolean canRead;
+    private List<Integer> bufferedKeys;
 
     public Input() {
         toggled = new boolean[525];
         pressed = new boolean[525];
+        bufferedKeys = new ArrayList<>();
+        canRead = false;
         mousePosition = new Position(-1, -1);
     }
     /*
@@ -69,6 +75,13 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
     public void keyReleased(KeyEvent e) {
         pressed[e.getKeyCode()] = false;
         toggled[e.getKeyCode()] = false;
+        captureKey(e);
+    }
+
+    private void captureKey(KeyEvent e) {
+        if (canRead) {
+            bufferedKeys.add(e.getKeyCode());
+        }
     }
 
     @Override
@@ -100,5 +113,15 @@ public class Input implements KeyListener, MouseListener, MouseMotionListener {
     public void mouseMoved(MouseEvent e) {
         mousePosition = new Position(e.getPoint().getX(), e.getPoint().getY());
     }
-    
+
+    public void clearBufferedKeys(){
+        bufferedKeys.clear();
+    }
+
+    public void setCanRead(boolean value){
+        canRead = value;
+    }
+    public List<Integer> getBufferedKeys() {
+        return bufferedKeys;
+    }    
 }

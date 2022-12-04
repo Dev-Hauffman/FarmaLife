@@ -3,7 +3,6 @@ package state;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import audio.AudioPlayer;
@@ -32,7 +31,6 @@ public abstract class State {
     protected IGameSpace gameSpace;
     protected Camera camera;
     protected Time time;
-    protected GameText text; //DELETE
     
     protected Size windowSize;
 
