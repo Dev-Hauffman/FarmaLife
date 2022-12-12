@@ -14,6 +14,7 @@ import entity.GameObject;
 import gfx.ImageUtils;
 import gfx.SpriteLibrary;
 import state.State;
+import text.GameText;
 
 public class UIObject extends GameObject{
     protected List<GameObject> children;
@@ -62,21 +63,21 @@ public class UIObject extends GameObject{
         // }
         // children.sort(Comparator.comparing(GameObject::getRenderOrder)
         for (GameObject gameObject : children) {
-            if (gameObject.getClass().getSimpleName().equals("SearchBar")) {
-                // graphics.setColor(Color.blue);
-                // graphics.drawRect(0, 0, gameObject.getSprite().getWidth(null), gameObject.getSprite().getHeight(null));
-                // System.out.println(gameObject.getParent().getPosition().getIntX());
-                // System.out.println(gameObject.getParent().getPosition().getIntY());
-                // System.out.println(gameObject.getPosition().getIntX());
-                // System.out.println(gameObject.getPosition().getIntY());
+            // if (gameObject.getClass().getSimpleName().equals("SearchBar")) {
+            //     graphics.setColor(Color.blue);
+            //     graphics.drawRect(0, 0, gameObject.getSprite().getWidth(null), gameObject.getSprite().getHeight(null));
+            //     System.out.println(gameObject.getParent().getPosition().getIntX());
+            //     System.out.println(gameObject.getParent().getPosition().getIntY());
+            //     System.out.println(gameObject.getPosition().getIntX());
+            //     System.out.println(gameObject.getPosition().getIntY());
                 
-                graphics.drawImage(
-                    gameObject.getSprite(),
-                    gameObject.getPosition().getIntX() - getPosition().getIntX(),
-                    gameObject.getPosition().getIntY() - getPosition().getIntY(),
-                    null
-                );
-            }else{
+            //     graphics.drawImage(
+            //         gameObject.getSprite(),
+            //         gameObject.getPosition().getIntX() - getPosition().getIntX(),
+            //         gameObject.getPosition().getIntY() - getPosition().getIntY(),
+            //         null
+            //     );
+            // }else{
                 // if (gameObject.getParent().getClass().getSimpleName().equals("ButtonObject")) {
                 //     System.out.println(gameObject.getParent().getPosition().getIntX());
                 //     System.out.println(gameObject.getParent().getPosition().getIntY());
@@ -93,18 +94,36 @@ public class UIObject extends GameObject{
                 // }
                 // System.out.println(gameObject.getPosition().getIntX() - getPosition().getIntX());
                 // System.out.println(gameObject.getPosition().getIntY() - getPosition().getIntY());
-                graphics.drawImage(
-                    gameObject.getSprite(),
-                    gameObject.getPosition().getIntX() - getPosition().getIntX(),
-                    gameObject.getPosition().getIntY() - getPosition().getIntY(),
-                    null
-                );
+                if (gameObject.getClass().getSimpleName().equals("GameText")) {
+                    graphics.drawImage(
+                        gameObject.getSprite(),
+                        ((GameText)gameObject).getRenderPosition().getIntX(),
+                        ((GameText)gameObject).getRenderPosition().getIntY(),
+                        null
+                    );
+                }
+                // else if (gameObject.getClass().getSimpleName().equals("ButtonObject")) {
+                //     graphics.drawImage(
+                //         gameObject.getSprite(),
+                //         ((ButtonObject)gameObject).getRenderPosition().getIntX(),
+                //         ((ButtonObject)gameObject).getRenderPosition().getIntY(),
+                //         null
+                //     );
+                // }
+                else{
+                    graphics.drawImage(
+                        gameObject.getSprite(),
+                        gameObject.getPosition().getIntX() - getPosition().getIntX(),
+                        gameObject.getPosition().getIntY() - getPosition().getIntY(),
+                        null
+                    );
+                }
                 // if (gameObject instanceof UIObject) {
                 //     if(((UIObject)gameObject).getChildren().size() > 0){
                 //         ((UIObject)gameObject).loadGraphics(spriteLibrary);
                 //     }
                 // }
-            }
+            // }
         }
         
         graphics.dispose();
@@ -137,7 +156,7 @@ public class UIObject extends GameObject{
     public void parent(GameObject parent) { //NEEDS WORK?
         super.parent(parent);
         setPosition(new Position(parent.getPosition().getIntX() + getPosition().getIntX(), parent.getPosition().getIntY() + getPosition().getIntY()));
-        if (parent instanceof UIObject) { // solution for input gamText from disappearing related to ButtonObject GameText Disappearing
+        if (parent instanceof UIObject) { // solution for input gamText from disappearing in searchBar, also related to ButtonObject GameText Disappearing
             for (GameObject gameObject : children) {
                 gameObject.parent(this);
             }

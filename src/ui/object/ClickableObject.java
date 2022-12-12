@@ -51,5 +51,9 @@ public abstract class ClickableObject extends UIObject{
             sprite.getHeight(null)
         );
     }
+
+    public boolean hasFocus() {
+        return hasFocus;
+    }
     
 }

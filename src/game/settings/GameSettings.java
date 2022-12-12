@@ -41,6 +41,10 @@ public class GameSettings {
         return audioSettings;
     }
 
+    public static Language getLanguage() {
+        return language;
+    }
+
     public enum Language{
         PORTUGUESE, ENGLISH;
     }

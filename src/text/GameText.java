@@ -23,18 +23,21 @@ public class GameText extends UIObject{
     protected String text;
     protected int renderOrder;
     protected int spacing;
+    protected Position renderPosition;
 
     public GameText(String text, State state, String fontName, Position position, int fontSize, int renderOrder){
         this.position = position;
+        this.renderPosition = position;
         this.fontName = fontName;
         this.fontSize = fontSize;
         this. renderOrder = renderOrder;
         this.state = state;
         this.children = new ArrayList<>();
         this.characters = new ArrayList<>();
-        int spacing = fontSize/2 + (fontSize/3);
+        int spacing = fontSize/2 + (fontSize/3) + (fontSize/9);
         this. spacing = spacing;
         if (text != null) {
+            this.text = text;
             stringToImage(text, state.getSpriteLibrary(), fontName, spacing, fontSize, renderOrder);            
             this.size = new Size(getStringSpriteWidth(), getStringSpriteHeight());
             loadGraphics(state.getSpriteLibrary());
@@ -116,6 +119,17 @@ public class GameText extends UIObject{
 
     public int getSpacing() {
         return spacing;
+    }
+
+    public boolean isEmpty(){
+        if (text == null) {
+            return true;
+        }
+        return characters.isEmpty();
+    }
+
+    public Position getRenderPosition() {
+        return renderPosition;
     }
 
 }

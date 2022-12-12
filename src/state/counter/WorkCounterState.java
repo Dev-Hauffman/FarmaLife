@@ -1,5 +1,6 @@
 package state.counter;
 
+import catalog.medicine.MedicineStock;
 import controller.CameraController;
 import core.Position;
 import core.Size;
@@ -17,8 +18,9 @@ import state.counter.pc.states.CallNextPCState;
 
 public class WorkCounterState extends State{
 
-    private Patient patient;
+    private Patient activePatient;
     private PCState computer;
+    private MedicineStock stock;
     public static int patientsCounter = 0;
 
 
@@ -26,7 +28,8 @@ public class WorkCounterState extends State{
         super(windowSize, input, gameSettings);
         gameSpace = new GameSpace(new Size(windowSize.getWidth(), 1354));
         computer = new CallNextPCState(this);
-        patient = new Patient(spriteLibrary);
+        activePatient = new Patient(spriteLibrary);
+        stock = new MedicineStock();
         initializeObjects();
         camera = new Camera(windowSize, new CameraController(input));
     }
@@ -49,5 +52,21 @@ public class WorkCounterState extends State{
     public void update(Game game) {
         super.update(game);
         computer.update(this);
+    }
+
+    public PCState getComputer() {
+        return computer;
+    }
+
+    public MedicineStock getStock() {
+        return stock;
+    }
+
+    public void setComputer(PCState computer) {
+        this.computer = computer;
+    }
+
+    public Patient getActivePatient() {
+        return activePatient;
     }
 }

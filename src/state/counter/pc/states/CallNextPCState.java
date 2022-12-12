@@ -19,13 +19,14 @@ import ui.object.UIObject;
 public class CallNextPCState extends PCState{
 	private boolean canChangeState;
 	private int timer;
-	public CallNextPCState(State state){
+
+	public CallNextPCState(WorkCounterState state){
 		super(state);
 		canChangeState = false;
 		timer = 100;
 	}
 
-	protected void createComputer(State state) {
+	protected void createComputer(WorkCounterState state) {
 		StaticObject screen = new StaticObject("startcomputerscreen", new Position(1014, 534), state.getSpriteLibrary(), 5);
 		UIObject display = new UIObject("clientcountercomputerdisplay", new Position(113, 93), state, 6, screen);
 		String ptDisplayString = "Nro de clientes";
@@ -53,6 +54,7 @@ public class CallNextPCState extends PCState{
 								   	state, 
 								  	new Position(0, 0), 
 					   	8, 
+						true,
 								  	screen, 
 									(localState) -> {
 										WorkCounterState.patientsCounter++;
@@ -64,15 +66,15 @@ public class CallNextPCState extends PCState{
 		nextPatient.setPosition(new Position(display.getSprite().getWidth(null)/2, 200));
 		objects.add(screen);
 		objects.add(display);
-		objects.add(nextPatient);		
+		objects.add(nextPatient);
 	}
 
 	@Override
-	public void update(State state){
+	public void update(WorkCounterState state){
 		if(canChangeState){	
 			timer--;
 			if(timer < 0){
-				((WorkCounterState)state).changePCState(new SearchBarPCState(state));
+				((WorkCounterState)state).changePCState(new CartPCState(state, new ArrayList<>()));
 			}
 		}
 	}

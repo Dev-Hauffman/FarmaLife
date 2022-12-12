@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import audio.AudioPlayer;
+import catalog.medicine.MedicineLoader;
 import core.Position;
 import core.Size;
 import display.Camera;

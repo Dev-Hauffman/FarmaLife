@@ -4,26 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entity.GameObject;
-import state.State;
+import state.counter.WorkCounterState;
 
 public abstract class PCState {
   protected List<GameObject> objects;
 
-  public PCState(State state){
-      objects = new ArrayList<>();        
-      createComputer(state);
+  public PCState(WorkCounterState state){
+    objects = new ArrayList<>();        
+    createComputer(state);
   }
 
-  protected abstract void createComputer(State state);
+  protected abstract void createComputer(WorkCounterState state);
 
   public List<GameObject> getObjects() {
-  return objects;
+    return objects;
   }
 
-  public void update(State state) {
+  public void update(WorkCounterState state) {
   }
 
-  public void cleanUp(State state){
+  public void cleanUp(WorkCounterState state){
     state.getGameObject().removeAll(objects);
   }
 
