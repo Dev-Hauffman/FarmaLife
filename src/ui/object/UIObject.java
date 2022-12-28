@@ -32,8 +32,9 @@ public class UIObject extends GameObject{
         this.renderOrder = renderOrder;
         this.state = state;
         this.spriteName = spriteName;
-
-        loadGraphics(state.getSpriteLibrary());
+        if (spriteName != null) {
+            loadGraphics(state.getSpriteLibrary());
+        }
     }
 
     public UIObject(String spriteName, Position position, State state, int renderOrder, GameObject parent){

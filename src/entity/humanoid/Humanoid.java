@@ -28,7 +28,7 @@ public class Humanoid extends MovingEntity {
         effects = new ArrayList<>();
         action = Optional.empty();
 
-        this.animationManager = new AnimationManager(spriteLibrary.getSpriteSets(getRandomCharacter()));
+        // this.animationManager = new AnimationManager(spriteLibrary.getSpriteSets(getRandomCharacter()));
 
         this.collisionBoxSize = new Size(16, 28);
         this.renderOffset = new Position(size.getWidth() / 2, size.getHeight() - 12);

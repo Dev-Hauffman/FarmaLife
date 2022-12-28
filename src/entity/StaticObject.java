@@ -41,5 +41,15 @@ public class StaticObject extends GameObject{
     public Image getSprite() {
         return sprite;
     }
+
+    @Override
+    public Position getPosition() {
+        Position finalPosition = Position.copyOf(position);
+
+        if (parent != null) {
+            finalPosition.add(parent.getPosition());
+        }
+        return finalPosition;
+    }
     
 }

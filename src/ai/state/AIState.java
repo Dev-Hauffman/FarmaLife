@@ -1,7 +1,10 @@
 package ai.state;
 
 import ai.AITransition;
+import ai.manager.IState;
+import entity.GameObject;
 import entity.NPC;
+import entity.patient.Patient;
 import state.State;
 
 public abstract class AIState {
@@ -13,13 +16,17 @@ public abstract class AIState {
 
     protected abstract AITransition initializeTransition();
 
-    public abstract void update(State state, NPC currentCharacter);
+    public abstract void update(State state, GameObject currentCharacter);
 
-    public boolean shouldTransition(State state, NPC currentCharacter) {
-        return transition.shouldTransition(state, currentCharacter);
+    // public boolean shouldTransition(State state, GameObject currentCharacter) {
+    //     return transition.shouldTransition(state, currentCharacter);
+    // }
+
+    public boolean shouldTransition(State state, Patient currentPatient) {
+        return transition.shouldTransition(state, currentPatient);
     }
 
-    public String getNextState() {
+    public IState getNextState() {
         return transition.getNextState();
     }
 }

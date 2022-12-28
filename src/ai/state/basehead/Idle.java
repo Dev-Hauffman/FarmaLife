@@ -1,24 +1,26 @@
-package ai.state;
+package ai.state.basehead;
 
 import ai.AITransition;
+import ai.state.AIState;
+import core.Rotation;
+import entity.AnimatedObject;
 import entity.GameObject;
-import entity.NPC;
 import entity.patient.Patient;
 import state.State;
 
-public class Stand extends AIState{
-    private int updatesAlive;
-    
+public class Idle extends AIState{
+
     @Override
     protected AITransition initializeTransition() {
-        // return new AITransition("wander", ((state, currentCharacter) -> updatesAlive >= state.getTime().getUpdatesFromSeconds(3)));
+        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public void update(State state, GameObject currentCharacter) {
-        updatesAlive++;
         
     }
+
+    
     
 }

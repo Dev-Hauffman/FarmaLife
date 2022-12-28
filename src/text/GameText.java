@@ -13,6 +13,7 @@ import entity.GameObject;
 import gfx.ImageUtils;
 import gfx.SpriteLibrary;
 import state.State;
+import state.counter.ui.QuickAnswer;
 import ui.object.UIObject;
 import java.awt.Color;
 
@@ -34,8 +35,7 @@ public class GameText extends UIObject{
         this.state = state;
         this.children = new ArrayList<>();
         this.characters = new ArrayList<>();
-        int spacing = fontSize/2 + (fontSize/3) + (fontSize/9);
-        this. spacing = spacing;
+        this.spacing = decideSpacing(fontSize);
         if (text != null) {
             this.text = text;
             stringToImage(text, state.getSpriteLibrary(), fontName, spacing, fontSize, renderOrder);            
@@ -44,9 +44,18 @@ public class GameText extends UIObject{
         }
     }
 
+    private int decideSpacing(int fontSize) {
+        switch (fontSize) {
+            case 8:
+                return 8;
+        
+            default:
+                return fontSize/2 + (fontSize/3) + (fontSize/9);        }
+    }
+
     private void stringToImage(String text, SpriteLibrary spriteLibrary, String fontName, int spacing, int fontSize, int renderOrder){
         for (int i = 0; i < text.length(); i++) {
-            SingleCharacter currentChar = new SingleCharacter(position.getIntX(), position.getIntY(), text.charAt(i), fontName, spriteLibrary, i, spacing, fontSize, renderOrder);
+            SingleCharacter currentChar = new SingleCharacter(0, 0, text.charAt(i), fontName, spriteLibrary, i, spacing, fontSize, renderOrder);
             characters.add(currentChar);
         }
     }
@@ -56,11 +65,13 @@ public class GameText extends UIObject{
         if (getStringSpriteWidth() > 0 && getStringSpriteHeight() > 0) {
             BufferedImage image = (BufferedImage) ImageUtils.createCompatibleImage(new Size(getStringSpriteWidth(), getStringSpriteHeight()), ImageUtils.ALPHA_BITMASKED);
             Graphics2D graphics = image.createGraphics();
+            graphics.setColor(Color.BLUE); // REMOVE
+            graphics.drawRect(0, 0, getStringSpriteWidth() - 1, getStringSpriteHeight() - 1); // REMOVE
             for (GameObject gameObject : characters) {
                 graphics.drawImage(
                     gameObject.getSprite(),
-                    gameObject.getPosition().getIntX() - getPosition().getIntX(),
-                    gameObject.getPosition().getIntY() - getPosition().getIntY(),
+                    gameObject.getPosition().getIntX(),
+                    gameObject.getPosition().getIntY(),
                     null
                 );
             }
@@ -90,7 +101,7 @@ public class GameText extends UIObject{
     }
 
     public int getStringSpriteWidth(){        
-        return getCharacters().size() * getSpacing();
+        return getCharacterSprites().size() * getSpacing();
     }
 
     public int getStringSpriteHeight(){
@@ -107,10 +118,6 @@ public class GameText extends UIObject{
     @Override
     public void update(State state) {
         super.update(state);
-    }
-
-    public List<SingleCharacter> getCharacters() {
-        return characters;
     }
 
     public String getText() {
@@ -130,6 +137,10 @@ public class GameText extends UIObject{
 
     public Position getRenderPosition() {
         return renderPosition;
+    }
+
+    public int getFontSize() {
+        return fontSize;
     }
 
 }

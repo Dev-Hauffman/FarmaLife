@@ -6,6 +6,7 @@ import core.Direction;
 import core.Motion;
 import core.Position;
 import core.Size;
+import game.Game;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
 import state.State;
@@ -26,17 +27,17 @@ public abstract class MovingEntity extends GameObject {
         this.entityController = controller;
         this.motion =  new Motion(2);
         this.direction = Direction.S;
-        this.animationManager = new AnimationManager(spriteLibrary.getSpriteSets("dave"));
+        // this.animationManager = new AnimationManager(spriteLibrary.getSpriteSets("dave"));
     }
 
     @Override
     public void update(State state) {
         motion.update(entityController);
         handleMotion();
-        animationManager.update(direction);
+        // animationManager.update(direction);
 
         handleCollisions(state);
-        animationManager.playAnimation(decideAnimation());
+        // animationManager.playAnimation(decideAnimation());
        
         apply(motion);
     }
@@ -74,7 +75,7 @@ public abstract class MovingEntity extends GameObject {
 
     @Override
     public Image getSprite() {
-        return animationManager.getSprite();
+        return animationManager.getSprite(Game.SPRITE_SIZE, Game.SPRITE_SIZE);
     }    
 
     public IEntityController getEntityController() {

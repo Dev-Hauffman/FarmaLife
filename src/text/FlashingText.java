@@ -63,8 +63,8 @@ public class FlashingText extends GameText{
         for (GameObject gameObject : characters) {
             graphics.drawImage(
                 gameObject.getSprite(),
-                gameObject.getPosition().getIntX() - getPosition().getIntX(),
-                gameObject.getPosition().getIntY() - getPosition().getIntY(),
+                gameObject.getPosition().getIntX(),
+                gameObject.getPosition().getIntY(),
                 null
             );
         }

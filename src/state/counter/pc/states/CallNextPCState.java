@@ -57,6 +57,7 @@ public class CallNextPCState extends PCState{
 						true,
 								  	screen, 
 									(localState) -> {
+										state.spawnPatient();
 										WorkCounterState.patientsCounter++;
 										displayNumber.setText("#" + String.format("%03d", WorkCounterState.patientsCounter));
 										displayNumber.flashText(100);

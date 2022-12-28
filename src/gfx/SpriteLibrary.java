@@ -23,7 +23,7 @@ public class SpriteLibrary {
         loadImages("/sprites/fonts");
         loadImages("/sprites/units");
         loadImages("/sprites/scenery");
-        loadImages("/sprites/bodyparts/body");
+        loadSpriteSets("/sprites/bodyparts");
     }
 
     private void loadImages(String path) {

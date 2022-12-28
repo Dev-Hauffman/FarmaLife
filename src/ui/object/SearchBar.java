@@ -99,7 +99,7 @@ public class SearchBar extends ClickableObject{
     private Position getCursorPosition() {
         if (children.contains(searchBarContent)) {
             if (searchBarContent.getCharacterSprites().size() > 0) {
-                return new Position(0 + searchBarContent.getCharacters().size() * searchBarContent.getSpacing(), 0);
+                return new Position(0 + searchBarContent.getCharacterSprites().size() * searchBarContent.getSpacing(), 0);
             }
         }
         return new Position(0, 0);

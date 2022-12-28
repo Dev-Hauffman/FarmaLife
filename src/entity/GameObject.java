@@ -44,10 +44,6 @@ public abstract class GameObject {
 
     public Position getPosition() {
         Position finalPosition = Position.copyOf(position);
-
-        if (parent != null) {
-            finalPosition.add(parent.getPosition());
-        }
         return finalPosition;
     }    
 
@@ -83,9 +79,6 @@ public abstract class GameObject {
     }
 
     public void setPosX(int posX) {
-        if (parent != null) {
-            this.position.setX(posX + parent.getPosition().getIntX());    
-        }
         this.position.setX(posX);
     }
 

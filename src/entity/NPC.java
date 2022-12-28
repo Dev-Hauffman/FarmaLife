@@ -1,6 +1,6 @@
 package entity;
 
-import ai.AIManager;
+import ai.manager.AIManager;
 import controller.IEntityController;
 import core.Motion;
 import entity.humanoid.Humanoid;
@@ -11,14 +11,14 @@ public class NPC extends Humanoid {
     private AIManager aiManager;
     public NPC(IEntityController controller, SpriteLibrary spriteLibrary) {
         super(controller, spriteLibrary);
-        aiManager = new AIManager();
+        // aiManager = new AIManager();
         motion = new Motion(Math.random() + 1);
     }
     
     @Override
     public void update(State state) {
         super.update(state);
-        aiManager.update(state, this);
+        // aiManager.update(state, this);
     }
 
     @Override
