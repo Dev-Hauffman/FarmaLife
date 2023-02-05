@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.Position;
+import game.settings.GameSettings;
+import game.settings.GameSettings.Language;
 import state.counter.WorkCounterState;
 import state.counter.pc.PCState;
 import text.GameText;
@@ -16,6 +18,7 @@ public class CartPCState extends PCState{
     private List<CartItem> cart;
     private UIObject cartBackground;
     private boolean refresh;
+    private ButtonObject finishButton;
 
     public CartPCState(WorkCounterState state, List<String> searchResult){
         super(state);
@@ -63,7 +66,7 @@ public class CartPCState extends PCState{
     protected void createComputer(WorkCounterState state) {
         cart = new ArrayList<>();
         UIObject screen = new UIObject("startcomputerscreen", new Position(1014, 534), state, 5);
-        GameText patientInfo = new GameText("Cliente " + "#" + String.format("%03d", WorkCounterState.patientsCounter), state, "testFont", new Position(40, 34), 16, 7);
+        GameText patientInfo = new GameText("Cliente " + "#" + String.format("%03d", WorkCounterState.patientsCounter), state, "testFont", new Position(40, 24), 16, 7);
         screen.addChildren(patientInfo);
         UIObject searchBarBackground = new UIObject("searchbarbackground", new Position(36, 60), state, 6);
         screen.addChildren(searchBarBackground);
@@ -74,6 +77,41 @@ public class CartPCState extends PCState{
         objects.add(screen);
         cartBackground = new UIObject("cartbackground",new Position(36, 110), state, 6);
         screen.addChildren(cartBackground);
+        String ptFinish = "FINALIZAR";
+        String engFinish = "FINISH";
+        finishButton = new ButtonObject(
+                            GameSettings.language == Language.PORTUGUESE? ptFinish : engFinish, 
+        "callnextcomputerbutton", 
+            "clickedcallnextcomputerbutton", 
+                            state, 
+                            new Position(0, 0), 
+                8, 
+                true,
+                            screen, 
+                            (localState) -> {
+                                state.changePCState(new CallNextPCState(state));
+                                if (state.getScore().getCurrentResult().hasLied()) {
+                                    System.out.println("you lied!");// REMOVE
+                                }else{
+                                    System.out.println("you said the truth!"); // REMOVE
+                                }
+                                if (state.getScore().getCurrentResult().isWrongMedicine()) {
+                                    System.out.println("wrong medicine!"); // REMOVE
+                                }else{
+                                    System.out.println("right medicine!"); // REMOVE
+                                }
+                                if (cart.size() > 1) {
+                                    state.getScore().getCurrentResult().setRightCart(false);
+                                    System.out.println("too many items in the cart!");
+                                }else{
+                                    // TODO what if cart is empty or if there's on correct or incorrect item inside
+                                }
+                                state.getScore().changeCurrentResult();
+                            }
+		);
+        finishButton.setDisabled(true);
+        finishButton.setPosition(new Position((screen.getSprite().getWidth(null)/2) - (finishButton.getSprite().getWidth(null)/2), 320));
+        objects.add(finishButton);
     }
 
     @Override
@@ -85,6 +123,10 @@ public class CartPCState extends PCState{
             setCartResults(state);
             refresh = false;
         }
+    }
+
+    public ButtonObject getFinishButton() {
+        return finishButton;
     }
 
     private class CartItem{

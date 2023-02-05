@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LinesCatalog {
-    private List<Line> fullLineList;
+    private static List<Line> fullLineList;
     private List<Line> startingList;
     private List<LineTopic> topicCatalog;
     private List<LineTopic> startingTopics;
@@ -45,5 +45,18 @@ public class LinesCatalog {
 
     public List<LineTopic> getStartingTopics() {
         return startingTopics;
+    }
+
+    public static List<PlayerLine> getStreakLinesFromIds(List<Integer> ids){
+        List<PlayerLine> foundLines = new ArrayList<>();
+        for (Integer id : ids) {
+            if (id < 0) {
+                continue;
+            }
+            if (fullLineList.get(id) instanceof PlayerLine) {
+                foundLines.add((PlayerLine)fullLineList.get(id));
+            }
+        }
+        return foundLines;
     }
 }

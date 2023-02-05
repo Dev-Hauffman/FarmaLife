@@ -11,10 +11,11 @@ public class Line {
     private int nodeLevel;
     private StagesEnum stage;
     private boolean initialLine;
-    private List<Tags> tags;
+    private List<String> tags;
     private List<String> engLine;
     private List<String> ptLine;
-    private List<Integer> reponsesId;
+    private List<Integer> responsesId;
+    private List<String> actions;
     // private List<Line> responses;
 
     public Line(){
@@ -22,7 +23,8 @@ public class Line {
         tags = new ArrayList<>();
         engLine = new ArrayList<>();
         ptLine = new ArrayList<>();
-        reponsesId = new ArrayList<>();
+        responsesId = new ArrayList<>();
+        actions = new ArrayList<>();
         // responses = new ArrayList<>();
     }
 
@@ -46,7 +48,7 @@ public class Line {
     }
 
 
-    public List<Tags> getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
@@ -58,13 +60,17 @@ public class Line {
         return ptLine;
     }
 
-    public List<Integer> getReponsesId() {
-        return reponsesId;
+    public List<Integer> getResponsesId() {
+        return responsesId;
     }
 
     // public List<Line> getResponses() {
     //     return responses;
     // }
+
+    public List<String> getAction() {
+        return actions;
+    }
 
     public boolean isInitialLine() {
         return initialLine;
@@ -85,11 +91,5 @@ public class Line {
 
     public void setInitialLine(boolean initialLine) {
         this.initialLine = initialLine;
-    }
-
-
-    public class Tags{
-        private String name;
-        private boolean valid;
     }
 }

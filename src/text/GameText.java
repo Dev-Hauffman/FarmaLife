@@ -13,7 +13,6 @@ import entity.GameObject;
 import gfx.ImageUtils;
 import gfx.SpriteLibrary;
 import state.State;
-import state.counter.ui.QuickAnswer;
 import ui.object.UIObject;
 import java.awt.Color;
 
@@ -48,6 +47,9 @@ public class GameText extends UIObject{
         switch (fontSize) {
             case 8:
                 return 8;
+
+            case 10:
+                return 10;
         
             default:
                 return fontSize/2 + (fontSize/3) + (fontSize/9);        }

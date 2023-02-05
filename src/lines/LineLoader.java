@@ -65,28 +65,37 @@ public class LineLoader {
                     line.setInitialLine(Boolean.parseBoolean(aux[1]));
                 }
                 if (aux[0].equals("tags")) {
-                    continue;
+                    String[] tags = aux[1].split(",");
+                    for (int i = 0; i < tags.length; i++) {
+                        line.getTags().add(tags[i]);
+                    }
                 }
                 if (aux[0].equals("engline")) {
                     String[] engline = aux[1].split(" ");
                     for (int i = 0; i < engline.length; i++) {
-                        line.getEngLine().add(engline[i]);
+                        line.getEngLine().add(engline[i].toUpperCase());
                     }
                 }
                 if (aux[0].equals("ptline")) {
                     String[] ptline = aux[1].split(" ");
                     for (int i = 0; i < ptline.length; i++) {
-                        line.getPtLine().add(ptline[i]);
+                        line.getPtLine().add(ptline[i].toUpperCase());
                     }
                 }
                 if (aux[0].equals("responsesid")) {
                     String[] responseids = aux[1].split(",");
                     for (int i = 0; i < responseids.length; i++) {
                         if (responseids[i].equals("none")){
-                            line.getReponsesId().add(-1);
+                            line.getResponsesId().add(-1);
                             break;
                         }
-                        line.getReponsesId().add(Integer.parseInt(responseids[i]));
+                        line.getResponsesId().add(Integer.parseInt(responseids[i]));
+                    }
+                }
+                if (aux[0].equals("action")) {
+                    String[] actions = aux[1].split(",");
+                    for (int i = 0; i < actions.length; i++) {
+                        line.getAction().add(actions[i]);
                     }
                 }
                 if (line instanceof PlayerLine) {
@@ -163,7 +172,12 @@ public class LineLoader {
                     }
                 }
                 if (aux[0].equals("relatedtopics")) {
-                    
+                    String[] topics = aux[1].split(",");
+                    for (int i = 0; i < topics.length; i++) {
+                        if (line instanceof NPCLine) {
+                            ((NPCLine)line).getRelatedTopics().add(topics[i]);
+                        }
+                    }
                 }
                 if (aux[0].equals("}")) {
                     catalog.getFullLineList().add(line);

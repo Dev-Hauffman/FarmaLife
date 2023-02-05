@@ -23,6 +23,10 @@ public class SubStageAIManager extends AIManager{
                 child.transitionTo(BehaviorEnum.MOVING_TO_START);
                 break;
         
+            case LEAVING:
+                child.transitionTo(BehaviorEnum.MOVING_TO_END);
+                break;
+
             default:
                 break;
         }

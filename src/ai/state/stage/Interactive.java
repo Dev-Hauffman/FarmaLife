@@ -1,10 +1,11 @@
 package ai.state.stage;
 
 import ai.AITransition;
-import ai.manager.StageAIManager.StagesEnum;
+import ai.manager.StageAIManager.AIStagesEnum;
 import ai.state.AIState;
 import entity.GameObject;
 import state.State;
+import state.counter.StagesEnum;
 import state.counter.WorkCounterState;
 
 public class Interactive extends AIState{
@@ -12,8 +13,8 @@ public class Interactive extends AIState{
 
     @Override
     protected AITransition initializeTransition() {
-        return new AITransition(StagesEnum.LEAVE_SCENE, ((state, currentPatient) -> {
-            return false;
+        return new AITransition(AIStagesEnum.LEAVE_SCENE, ((state, currentPatient) -> {
+            return currentPatient.getStage() == StagesEnum.LEAVING;
         })
     );
     }
@@ -22,7 +23,8 @@ public class Interactive extends AIState{
     public void update(State state, GameObject currentCharacter) {
         if (!hasSetSpeak) {
             if (state instanceof WorkCounterState) {
-                ((WorkCounterState)state).getPlayerChoices().setCanSpeak(true);
+                ((WorkCounterState)state).getPlayerChoices().getFirstLines(((WorkCounterState)state), StagesEnum.GREETING);
+                ((WorkCounterState)state).getQuickAnswers().addQuickAnswers(state);
                 hasSetSpeak = true;
             }
         }

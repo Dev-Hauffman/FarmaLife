@@ -6,18 +6,20 @@ import ai.state.AIState;
 import entity.GameObject;
 import state.State;
 
-public class EnterScene extends AIState{
+public class LeaveScene extends AIState{
 
     @Override
     protected AITransition initializeTransition() {
         return new AITransition(AIStagesEnum.INTERACTIVE, ((state, currentPatient) -> {
-                return currentPatient.getBodyParts().get("body").getPosition().getIntX() == 0;
-            })
-        );
+            return false;
+        })
+    );
     }
 
     @Override
     public void update(State state, GameObject currentCharacter) {
-                
+        // TODO Auto-generated method stub
+        
     }
+    
 }

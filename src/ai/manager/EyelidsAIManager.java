@@ -1,6 +1,5 @@
 package ai.manager;
 
-import ai.state.basehead.MoveToStart;
 import ai.state.eyelids.Blink;
 import entity.patient.Patient;
 import state.State;

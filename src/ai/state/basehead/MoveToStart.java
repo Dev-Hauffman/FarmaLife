@@ -21,7 +21,7 @@ public class MoveToStart extends AIState {
     public void update(State state, GameObject currentCharacter) {
         if (currentCharacter instanceof AnimatedObject) {
             if (currentCharacter.getPosition().getIntX() < 0){
-                currentCharacter.setPosX(currentCharacter.getPosition().getIntX() + 5);
+                currentCharacter.setPosX(currentCharacter.getPosition().getIntX() + 7);
                 currentCharacter.setPosY((int)(Math.sin(currentCharacter.getPosition().getIntX()*10)*2));
                 // System.out.println((int)(Math.sin(currentCharacter.getPosition().getIntX()*10)*2));
                 if (currentCharacter.getPosition().getIntX() > -125 && ((AnimatedObject)currentCharacter).getName().equals("body")) {

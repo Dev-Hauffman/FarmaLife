@@ -8,6 +8,8 @@ import state.State;
 
 public abstract class ClickableObject extends UIObject{
     
+    public ClickableObject(){}
+
     public ClickableObject(String name, Position position, State state, int renderOrder) {
         super(name, position, state, renderOrder);
     }

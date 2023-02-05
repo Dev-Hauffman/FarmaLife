@@ -11,6 +11,7 @@ import core.Position;
 import core.Size;
 import display.Camera;
 import entity.GameObject;
+import entity.TransitionObject;
 import game.Game;
 import game.Time;
 import game.settings.GameSettings;
@@ -18,6 +19,8 @@ import gamespace.GameSpace;
 import gamespace.IGameSpace;
 import gfx.SpriteLibrary;
 import input.Input;
+import state.counter.WorkCounterState;
+import state.mind.MindState;
 import text.GameText;
 import ui.UIContainer;
 
@@ -35,7 +38,7 @@ public abstract class State {
     
     protected Size windowSize;
 
-    private State nextState;
+    protected State nextState;
 
     public State(Size windowSize, Input input, GameSettings gameSettings) {
         this.gameSettings = gameSettings;
@@ -60,7 +63,13 @@ public abstract class State {
         handleMouseInput();
 
         if (nextState != null) {
+            if (nextState instanceof WorkCounterState && game.getState() instanceof MindState) {
+                TransitionObject transition = new TransitionObject(nextState.getSpriteLibrary(), 10);
+                nextState.getGameObject().add(transition);
+                transition.playAnimation(true);
+            }
             game.enterState(nextState);
+            nextState = null;
         }
     }
 
@@ -134,6 +143,18 @@ public abstract class State {
 
     public void cleanUp() {
         audioPlayer.clear();
+    }
+
+    public Size getWindowSize() {
+        return windowSize;
+    }
+
+    public List<GameObject> getGameObjects() {
+        return gameObjects;
+    }
+
+    public void setGameObjects(List<GameObject> gameObjects) {
+        this.gameObjects = gameObjects;
     }
     
 }

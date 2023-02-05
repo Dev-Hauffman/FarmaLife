@@ -1,5 +1,6 @@
 package ai.manager;
 
+import ai.state.basehead.MoveToEnd;
 import ai.state.basehead.MoveToStart;
 import entity.patient.Patient;
 import state.State;
@@ -16,8 +17,8 @@ public class BaseHeadAIManager extends AIManager{
     @Override
     protected void transitionTo(IState nextState) {
         switch ((BaseHeadEnum)nextState) {
-            case FACE_RIGHT:
-                
+            case MOVING_TO_END:
+                currentAIState = new MoveToEnd();
                 break;
 
             case MOVE_TO_START:
@@ -31,6 +32,6 @@ public class BaseHeadAIManager extends AIManager{
     }
 
     public enum BaseHeadEnum implements IState{
-        FACE_LEFT, FACE_RIGHT, FACE_FOWARD, FACE_HALF_RIGHT, FACE_HALF_LEFT, MOVE_TO_START;
+        FACE_LEFT, FACE_RIGHT, FACE_FOWARD, FACE_HALF_RIGHT, FACE_HALF_LEFT, MOVE_TO_START, MOVING_TO_END;
     }
 }

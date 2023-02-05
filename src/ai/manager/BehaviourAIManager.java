@@ -57,6 +57,15 @@ public class BehaviourAIManager extends AIManager{
                 iris.transitionTo(IrisEnum.IDLE);
                 mouth.transitionTo(MouthEnum.IDLE);
                 break;
+
+            case MOVING_TO_END:
+                baseHead.transitionTo(BaseHeadEnum.MOVING_TO_END);
+                body.transitionTo(BodyEnum.MOVING_TO_END);
+                eyebrow.transitionTo(eyebrow.getCurrentState());
+                eyelids.transitionTo(EyelidEnum.BLINK);
+                iris.transitionTo(IrisEnum.IDLE);
+                mouth.transitionTo(MouthEnum.IDLE);
+                break;
         
             default:
                 break;
@@ -64,6 +73,6 @@ public class BehaviourAIManager extends AIManager{
     }
     
     public enum BehaviorEnum implements IState{
-        MOVING_TO_START, IDLE, HAND_IN_PRESCRIPTION;
+        MOVING_TO_START, IDLE, HAND_IN_PRESCRIPTION, MOVING_TO_END;
     }
 }

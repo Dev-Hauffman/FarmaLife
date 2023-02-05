@@ -57,7 +57,7 @@ public class SearchBarPCState extends PCState{
             GameText medicine = new GameText(" ", state, "testFont", new Position(2, 0), 16, 6);
             medicine.setPosY((resultSpot.getSprite().getHeight(null)/2)-(medicine.getStringSpriteHeight()/2));
             resultSpot.addChildren(medicine);
-            GameText stock = new GameText(" ", state, "testFont", new Position(2, 0), 8, 6);
+            GameText stock = new GameText(" ", state, "testFont", new Position(2, 0), 7, 6);
             stock.setPosY((stockSpot.getSprite().getHeight(null)/2)-(stock.getStringSpriteHeight()/2));
             stockSpot.addChildren(stock);
             ButtonObject buttonSpot = new ButtonObject("+", "addcartbuttonunclicked", "addcartbuttonclicked", state, new Position(0, 0), 7, false, screen, (localState) -> {

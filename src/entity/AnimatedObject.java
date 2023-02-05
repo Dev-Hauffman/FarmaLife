@@ -24,9 +24,9 @@ public class AnimatedObject extends GameObject {
 
     public AnimatedObject(String name, Position position, Size size, SpriteLibrary spriteLibrary, int renderOrder) {
         entityController = new NPCController();
+        this.name = name;
         this.animationManager = new AnimationManager(spriteLibrary.getSpriteSets(name), this);
         this.position = position;
-        this.name = name;
         this.renderOrder = renderOrder;
         this.size = size;
     }
@@ -73,9 +73,10 @@ public class AnimatedObject extends GameObject {
 
     public void setRotation(Rotation rotation) {
         this.rotation = rotation;
-        if (name.equals("eyelids")) {
+        if (name.equals("eyelids")) { // to blink everytime the head rotates (eyelids rotate with it)
             animationManager.playAnimation("eyelidsTest", true);
         }
+        animationManager.setFinishedRotation(false);
         animationManager.rotate(rotation);
     }
     

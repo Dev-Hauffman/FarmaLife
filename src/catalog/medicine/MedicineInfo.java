@@ -25,6 +25,14 @@ public class MedicineInfo{
         return availability;
     }
 
+    public boolean isAvailable() {
+        if (availability.equals("EM ESTOQUE")) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public void setAvailability(boolean value) {
         if (value) {
             if (GameSettings.language == Language.PORTUGUESE) {

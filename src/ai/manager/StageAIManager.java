@@ -4,6 +4,7 @@ import ai.manager.SubStageAIManager.SubStagesEnum;
 import ai.state.AIState;
 import ai.state.stage.EnterScene;
 import ai.state.stage.Interactive;
+import ai.state.stage.LeaveScene;
 import entity.GameObject;
 import entity.patient.Patient;
 import state.State;
@@ -17,7 +18,7 @@ public class StageAIManager extends AIManager{
     }
 
     public void startRoutine() {
-        transitionTo(StagesEnum.ENTER_SCENE);
+        transitionTo(AIStagesEnum.ENTER_SCENE);
     }
 
     @Override
@@ -33,7 +34,7 @@ public class StageAIManager extends AIManager{
 
     @Override
     protected void transitionTo(IState nextState) {
-        switch ((StagesEnum)nextState) {
+        switch ((AIStagesEnum)nextState) {
             case ENTER_SCENE:
                 child.transitionTo(SubStagesEnum.ENTERING);
                 currentAIState = new EnterScene();
@@ -44,7 +45,8 @@ public class StageAIManager extends AIManager{
                 break;
 
             case LEAVE_SCENE:
-                
+                currentAIState = new LeaveScene();
+                child.transitionTo(SubStagesEnum.LEAVING);
                 break;
 
             default:
@@ -52,7 +54,7 @@ public class StageAIManager extends AIManager{
         }
     }
 
-    public enum StagesEnum implements IState{
+    public enum AIStagesEnum implements IState{
         ENTER_SCENE, INTERACTIVE, LEAVE_SCENE;
     }
 }

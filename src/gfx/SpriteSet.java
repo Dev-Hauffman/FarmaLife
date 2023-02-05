@@ -27,4 +27,8 @@ public class SpriteSet {
         }
         return animationSheets.get("default");
     }
+
+    public void checkAnimationSheets(){ //REMOVE, just for debug
+        System.out.println(animationSheets.keySet().toString());
+    }
 }

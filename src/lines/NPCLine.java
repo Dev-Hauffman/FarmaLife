@@ -9,9 +9,10 @@ public class NPCLine extends Line {
     private WaitingTimeEnum requiredWait;
     private DnaSexEnum DnaSex;
     private AgeEnum age;
-    private List<LineTopic> relatedTopics;
+    private List<String> relatedTopics;
 
     public NPCLine(){
+        super();
         requiredProfile = new ArrayList<>();
         relatedTopics = new ArrayList<>();
     }
@@ -52,7 +53,7 @@ public class NPCLine extends Line {
         return age;
     }
 
-    public List<LineTopic> getRelatedTopics() {
+    public List<String> getRelatedTopics() {
         return relatedTopics;
     }
 

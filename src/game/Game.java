@@ -51,4 +51,8 @@ public class Game {
         state = nextState;
     }
 
+    public State getState() {
+        return state;
+    }
+
 }

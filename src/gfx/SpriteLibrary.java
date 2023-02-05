@@ -16,12 +16,14 @@ public class SpriteLibrary {
         spriteSets = new HashMap<>();
         images = new HashMap<>();
         loadSpriteFromDisk();
+        // System.out.println(spriteSets.keySet().toString());
+        // System.out.println(images.keySet().toString());
     }
 
     private void loadSpriteFromDisk() {
         loadSpriteSets("/sprites/units");
         loadImages("/sprites/fonts");
-        loadImages("/sprites/units");
+        loadSpriteSets("/sprites/effects");
         loadImages("/sprites/scenery");
         loadSpriteSets("/sprites/bodyparts");
     }

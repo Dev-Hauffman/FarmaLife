@@ -1,11 +1,9 @@
 package ui.object;
 
 import java.awt.Image;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import core.Position;
@@ -44,7 +42,7 @@ public class UIObject extends GameObject{
 
     @Override
     public void update(State state) {
-        children.forEach(component -> component.update(state));        
+        List.copyOf(children).forEach(component -> component.update(state));  // Wasn't a copyOf, but I was getting concurrent exception when messing with Answer Display      
     }
 
     public void loadGraphics(SpriteLibrary spriteLibrary) {

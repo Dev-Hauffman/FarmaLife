@@ -6,6 +6,7 @@ import state.State;
 
 public class EyebrowAIManager extends AIManager{
     private BehaviourAIManager parent;
+    private EyebrowEnum currentState;
 
     @Override
     public void update(State state, Patient patient) {
@@ -18,7 +19,7 @@ public class EyebrowAIManager extends AIManager{
     protected void transitionTo(IState nextState) {
         switch ((EyebrowEnum)nextState) {
             case IDLE:
-                
+                currentState = EyebrowEnum.IDLE;
                 break;
 
             case MOVE_TO_START:
@@ -29,6 +30,10 @@ public class EyebrowAIManager extends AIManager{
                 break;
         }
         
+    }
+
+    public EyebrowEnum getCurrentState() {
+        return currentState;
     }
 
     public enum EyebrowEnum implements IState{
