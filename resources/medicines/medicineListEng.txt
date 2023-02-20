@@ -1,0 +1,67 @@
+aceclofenaco;60
+acetato de hidrocortisona;50
+acetylcysteine;40
+acetylsalicylic acid;90
+acido azelaico;30
+salicylic acid;30
+bisacodil;40
+bromidrato de dextrometorfano;40
+butilbrometo de escopolamina;50
+carbocisteina;40
+carbonato de calcio;70
+carmelose sodica;60
+ketoconazole;60
+cloreto de sodio;90
+cloridrato de ambroxol;70
+cloridrato de amorolfina;40
+cloridrato de azelastina;30
+cloridrato de benzidamina;60
+cloridrato de bromexina;60
+cloridrato de butenafina;40
+cloridrato de clobutinol;60
+cloridrato de epinastina;50
+cloridrato de fenazopiridina;40
+cloridrato de fexofenadina;50
+cloridrato de isotipendil;30
+cloridrato de levamisol;20
+cloridrato de lidocaína;50
+cloridrato de terbinafina;60
+clotrimazol;60
+colagenase;40
+deltametrina;40
+desloratadina;50
+diclofenaco dietilamonio;80
+diclofenaco sodico;60
+dicloridrato de levocetirizina;60
+dipyrone;90
+dipirona com cafeina;60
+dropropizina;70
+ebastina;50
+fendizoato de cloperastina;30
+flurbiprofeno;50
+flutrimazol;30
+guaifenesina;40
+heparina sodica;50
+hialuronato de sodio;40
+hidroxido de aluminio;70
+hipromelose;40
+ibuprofeno;80
+lactulose;60
+loratadina;70
+loxoprofeno sodico;40
+magaldrato;30
+maleato de dexclorfeniramina;80
+mebendazol;50
+metronidazol;40
+naproxeno;60
+nimesulida;70
+nitrato de miconazol;70
+nitrato de oxiconazol;40
+paracetamol;90
+permetrina;40
+picossulfato de sódio;30
+prometazina;60
+sulfato de neomicina;80
+sulfato ferroso;50
+sulfeto de selenio;30
+tioconazol;40

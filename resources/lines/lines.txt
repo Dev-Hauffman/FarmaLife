@@ -1,0 +1,1050 @@
+{
+type:player
+id:0
+parentid:none
+nodelevel:0
+stage:greeting
+initialline:true
+tags:none
+engline:Hello!
+ptline:OLA!
+responsesid:1,3,4,12,25,34
+action:none
+satisfactionrating:50
+quickanswer:true
+streaklines:9
+}
+{
+type:npc
+id:1
+parentid:0,2,11
+nodelevel:1
+stage:ordering
+initialline:false
+tags:none
+engline:HELLO, I want [medicine]...
+ptline:OLA, eu quero [medicine]...
+responsesid:6,10,49
+action:none
+requiredprofile:any
+targetsatisfaction:40
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:knows_medicine
+}
+{
+type:player
+id:2
+parentid:none
+nodelevel:0
+stage:greeting
+initialline:true
+tags:none
+engline:CAN I HELP YOU?
+ptline:POSSO LHE AJUDAR?
+responsesid:1,3,4,12,25,34
+action:none
+satisfactionrating:35
+quickanswer:true
+streaklines:none
+}
+{
+type:npc
+id:3
+parentid:0,2,11
+nodelevel:1
+stage:ordering
+initialline:false
+tags:none
+engline:Get me some [medicine]...
+ptline:Me ve [medicine]...
+responsesid:6,10,49
+action:none
+requiredprofile:any
+targetsatisfaction:40
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:knows_medicine
+}
+{
+type:npc
+id:4
+parentid:0,2,11
+nodelevel:1
+stage:ordering
+initialline:false
+tags:none
+engline:Hello! I would like to buy [medicine], please...
+ptline:Ola! Eu gostaria de comprar [medicine], por favor...
+responsesid:6,10,49
+action:none
+requiredprofile:any
+targetsatisfaction:70
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:knows_medicine
+}
+{
+type:player
+id:5
+parentid:none
+nodelevel:0
+stage:greeting
+initialline:true
+tags:none
+engline:...
+ptline:...
+responsesid:1,3,4,12,25,34,48
+action:none
+satisfactionrating:20
+quickanswer:true
+streaklines:none
+}
+{
+type:player
+id:6
+parentid:1,3,4
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:I'm out of stock...
+ptline:Eu estou sem estoque...
+responsesid:8
+action:no_stock
+satisfactionrating:45
+quickanswer:true
+streaklines:none
+}
+{
+type:npc
+id:7
+parentid:6
+nodelevel:3
+stage:ordering
+initialline:false
+tags:none
+engline:no, that was it, thank you...
+ptline:nao, era isso, obrigado...
+responsesid:none
+action:leave_scene
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:npc
+id:8
+parentid:6
+nodelevel:3
+stage:ordering
+initialline:false
+tags:none
+engline:ok, thanks...
+ptline:ok, obrigado...
+responsesid:none
+action:leave_scene
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:9
+parentid:0
+nodelevel:0
+stage:greeting
+initialline:false
+tags:none
+engline:Welcome!
+ptline:Bem vindo!
+responsesid:1,3,4,12,25,34,48
+action:none
+satisfactionrating:65
+quickanswer:false
+streaklines:none
+}
+{
+type:player
+id:10
+parentid:1,3,4,57
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:I got it in stock, anything else?
+ptline:eu tenho em estoque, mais alguma coisa?
+responsesid:7
+action:in_stock
+satisfactionrating:45
+quickanswer:true
+streaklines:none
+}
+{
+type:player
+id:11
+parentid:none
+nodelevel:0
+stage:greeting
+initialline:false
+tags:none
+engline:Welcome!
+ptline:Bem vindo!
+responsesid:1,3,4,12,25,34
+action:none
+satisfactionrating:55
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:12
+parentid:0,2,5,11
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:hi, do you have something for headache?
+ptline:oi, voce tem alguma coisa para dor de cabeca?
+responsesid:13,14,51,52,53
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:has_symptom
+}
+{
+type:player
+id:13
+parentid:12
+nodelevel:3
+stage:ordering
+initialline:false
+tags:dipirona,dipyrone
+engline:how about dipyrone?
+ptline:que tal dipirona?
+responsesid:15,54
+action:right_medicine,set_medicine
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:player
+id:14
+parentid:12
+nodelevel:3
+stage:ordering
+initialline:false
+tags:acetilcisteina,acetylcysteine
+engline:how about acetylcysteine?
+ptline:que tal acetilcisteina?
+responsesid:15,54
+action:wrong_medicine,set_medicine
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:15
+parentid:13,14,51,52,53
+nodelevel:4
+stage:ordering
+initialline:false
+tags:none
+engline:I have taken that before, I will want it, do you have it?
+ptline:eu ja tomei isso antes, eu vou querer, voce tem?
+responsesid:16,17
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:16
+parentid:15,54
+nodelevel:5
+stage:ordering
+initialline:false
+tags:none
+engline:I got it in stock, anything else?
+ptline:eu tenho em estoque, mais alguma coisa?
+responsesid:7
+action:in_stock
+satisfactionrating:45
+quickanswer:true
+streaklines:none
+}
+{
+type:player
+id:17
+parentid:15,54
+nodelevel:5
+stage:ordering
+initialline:false
+tags:none
+engline:it seems I'm out of stock...
+ptline:parece que estou sem estoque...
+responsesid:18
+action:no_stock
+satisfactionrating:50
+quickanswer:true
+streaklines:none
+}
+{
+type:npc
+id:18
+parentid:17
+nodelevel:6
+stage:ordering
+initialline:false
+tags:none
+engline:damn... anything else I could take?
+ptline:droga... algo mais que eu poderia tomar?
+responsesid:19
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:19
+parentid:18
+nodelevel:7
+stage:ordering
+initialline:false
+tags:paracetamol
+engline:perhaps paracetamol?
+ptline:talvez paracetamol?
+responsesid:20
+action:right_medicine,set_medicine
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:20
+parentid:19
+nodelevel:8
+stage:ordering
+initialline:false
+tags:none
+engline:I think it'll do... do you have it?
+ptline:eu acho que pode ser... voce tem?
+responsesid:21
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:21
+parentid:20,57
+nodelevel:8
+stage:ordering
+initialline:false
+tags:none
+engline:yes I do, anything else?
+ptline:sim eu tenho, mais alguma coisa?
+responsesid:22
+action:in_stock
+satisfactionrating:50
+quickanswer:true
+streaklines:none
+}
+{
+type:npc
+id:22
+parentid:21
+nodelevel:9
+stage:ordering
+initialline:false
+tags:none
+engline:no, that will be it...
+ptline:nao, era isso...
+responsesid:23
+action:none
+requiredprofile:any
+targetsatisfaction:45
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:23
+parentid:22
+nodelevel:10
+stage:ordering
+initialline:false
+tags:none
+engline:alright then, bye!
+ptline:certo entao, ate mais!
+responsesid:24
+action:none
+satisfactionrating:50
+quickanswer:true
+streaklines:none
+}
+{
+type:npc
+id:24
+parentid:23
+nodelevel:11
+stage:ordering
+initialline:false
+tags:none
+engline:bye...
+ptline:ate...
+responsesid:none
+action:leave_scene
+requiredprofile:any
+targetsatisfaction:45
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:npc
+id:25
+parentid:0,2,5,11
+nodelevel:1
+stage:ordering
+initialline:false
+tags:none
+engline:hi, my son has been coughing a lot lately, what should I give him?
+ptline:oi, meu filho tem tossido bastente ultimamente, o que eu deveria dar para ele?
+responsesid:26
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:has_symptom
+}
+{
+type:player
+id:26
+parentid:25
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:I can not prescribe a medicine...
+ptline:Eu nao posso prescrever uma medicacao...
+responsesid:28
+action:none
+satisfactionrating:40
+quickanswer:false
+streaklines:27
+}
+{
+type:player
+id:27
+parentid:26
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:in this case...
+ptline:nesse caso...
+responsesid:28
+action:none
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:28
+parentid:26,27
+nodelevel:3
+stage:ordering
+initialline:false
+tags:none
+engline:why not?
+ptline:porque nao?
+responsesid:29
+action:none
+requiredprofile:any
+targetsatisfaction:45
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:29
+parentid:28
+nodelevel:4
+stage:ordering
+initialline:false
+tags:none
+engline:it has to be done by a physician!
+ptline:deve ser feito por um medico clinico!
+responsesid:30
+action:none
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:30
+parentid:29
+nodelevel:5
+stage:ordering
+initialline:false
+tags:none
+engline:but I only need something for now, anything will do!
+ptline:mas eu so preciso de algo por hora, qualquer coisa serve!
+responsesid:31
+action:none
+requiredprofile:any
+targetsatisfaction:40
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:31
+parentid:30
+nodelevel:6
+stage:ordering
+initialline:false
+tags:none
+engline:sorry, but I can't do it...
+ptline:desculpe, mas nao posso fazer isso...
+responsesid:32,35,37
+action:none
+satisfactionrating:35
+quickanswer:false
+streaklines:33
+}
+{
+type:npc
+id:32
+parentid:31
+nodelevel:7
+stage:ordering
+initialline:false
+tags:none
+engline:fine, I'll find another pharmacy...
+ptline:tudo bem, eu vou encontrar outra farmacia...
+responsesid:none
+action:leave_scene
+requiredprofile:any
+targetsatisfaction:30
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:33
+parentid:31
+nodelevel:6
+stage:ordering
+initialline:false
+tags:none
+engline:it's dangerous!
+ptline:e perigoso!
+responsesid:32,35,37
+action:none
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:34
+parentid:0,2,5,11
+nodelevel:1
+stage:ordering
+initialline:false
+tags:none
+engline:hi, I'm looking for a medicine, but I've forgot the name...
+ptline:oi, estou procurando por uma medicacao, mas esqueci o nome...
+responsesid:36
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:has_symptom
+}
+{
+type:npc
+id:35
+parentid:31,33,46
+nodelevel:7
+stage:ordering
+initialline:false
+tags:none
+engline:ok, thanks...
+ptline:ok, obrigado...
+responsesid:none
+action:leave_scene
+requiredprofile:any
+targetsatisfaction:60
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:36
+parentid:34
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:What is it for?
+ptline:para que serve?
+responsesid:38
+action:none
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:37
+parentid:31,33
+nodelevel:7
+stage:ordering
+initialline:false
+tags:none
+engline:ok...
+ptline:ok...
+responsesid:none
+action:leave_scene
+requiredprofile:any
+targetsatisfaction:40
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:npc
+id:38
+parentid:36
+nodelevel:3
+stage:ordering
+initialline:false
+tags:none
+engline:it's for fungal infection...
+ptline:e para infeccao por fungos...
+responsesid:39,41
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:39
+parentid:38
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:which body area is affected by the infection?
+ptline:que parte do corpo e afetada pela infeccao?
+responsesid:40
+action:none
+satisfactionrating:55
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:40
+parentid:39
+nodelevel:3
+stage:ordering
+initialline:false
+tags:none
+engline:the skin...
+ptline:a pele...
+responsesid:41
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:41
+parentid:38,40
+nodelevel:4
+stage:ordering
+initialline:false
+tags:cetoconazol,ketoconazol
+engline:is it ketoconazole?
+ptline:seria cetoconazol?
+responsesid:42
+action:right_medicine,set_medicine
+satisfactionrating:55
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:42
+parentid:41
+nodelevel:5
+stage:ordering
+initialline:false
+tags:none
+engline:that's the one! Do you have it?
+ptline:e esse ai! Voce tem?
+responsesid:43
+action:none
+requiredprofile:any
+targetsatisfaction:55
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:43
+parentid:42
+nodelevel:6
+stage:ordering
+initialline:false
+tags:none
+engline:yes, I do! Anything else?
+ptline:sim, eu tenho! Mais alguma coisa?
+responsesid:44,45
+action:in_stock
+satisfactionrating:55
+quickanswer:true
+streaklines:none
+}
+{
+type:npc
+id:44
+parentid:43
+nodelevel:7
+stage:ordering
+initialline:false
+tags:none
+engline:no, that will be it!
+ptline:nao, era isso!
+responsesid:46
+action:none
+requiredprofile:any
+targetsatisfaction:55
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:npc
+id:45
+parentid:43
+nodelevel:7
+stage:ordering
+initialline:false
+tags:none
+engline:no, you helped me alot already!
+ptline:nao, voce ja me ajudou um monte!
+responsesid:46
+action:none
+requiredprofile:any
+targetsatisfaction:70
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:player
+id:46
+parentid:44,45
+nodelevel:8
+stage:ordering
+initialline:false
+tags:none
+engline:Thank you, have a good day!
+ptline:obrigado, tenha um bom dia!
+responsesid:47,35
+action:none
+satisfactionrating:70
+quickanswer:true
+streaklines:none
+}
+{
+type:npc
+id:47
+parentid:46
+nodelevel:9
+stage:ordering
+initialline:false
+tags:none
+engline:thank you, bye!
+ptline:obrigado, tchau!
+responsesid:none
+action:leave_scene
+requiredprofile:any
+targetsatisfaction:60
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:npc
+id:48
+parentid:0,2,5,9,11
+nodelevel:1
+stage:ordering
+initialline:false
+tags:none
+engline:hi, do you have [medicine]?
+ptline:oi, voce tem [medicine]?
+responsesid:6,10,49
+action:none
+requiredprofile:any
+targetsatisfaction:45
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:knows_medicine
+}
+{
+type:player
+id:49
+parentid:1,3,4,48
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:sorry, what is the medicine's name?
+ptline:desculpe, qual o nome da medicacao?
+responsesid:50
+action:none
+satisfactionrating:45
+quickanswer:true
+streaklines:none
+}
+{
+type:npc
+id:50
+parentid:49
+nodelevel:3
+stage:ordering
+initialline:false
+tags:none
+engline:[medicine]...
+ptline:[medicine]...
+responsesid:6,10
+action:none
+requiredprofile:any
+targetsatisfaction:40
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:knows_medicine
+}
+{
+type:player
+id:51
+parentid:12
+nodelevel:3
+stage:ordering
+initialline:false
+tags:acido acetilsalicilico,acetylsalicylic acid
+engline:how about acetylsalicylic acid?
+ptline:que tal acido acetilsalicilico?
+responsesid:15,54
+action:right_medicine,set_medicine
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:player
+id:52
+parentid:12
+nodelevel:3
+stage:ordering
+initialline:false
+tags:acido salicilico,salicylic acid
+engline:how about salicylic acid?
+ptline:que tal acido salicilico?
+responsesid:15,54
+action:wrong_medicine,set_medicine
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:player
+id:53
+parentid:12
+nodelevel:3
+stage:ordering
+initialline:false
+tags:loratadina,loratadine
+engline:how about loratadine?
+ptline:que tal loratadina?
+responsesid:15,54
+action:wrong_medicine,set_medicine
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:54
+parentid:13,14,51,52,53
+nodelevel:4
+stage:ordering
+initialline:false
+tags:none
+engline:I guess so, do you have it?
+ptline:eu acho que sim, voce tem?
+responsesid:16,17
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:any
+}
+{
+type:npc
+id:55
+parentid:0,2,5,11
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:hi, do you have something for allergic rhinitis?
+ptline:oi, voce tem alguma coisa para rinite alergica?
+responsesid:56
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:has_symptom
+}
+{
+type:player
+id:56
+parentid:55
+nodelevel:3
+stage:ordering
+initialline:false
+tags:loratadina,loratadine
+engline:how about loratadine?
+ptline:que tal loratadina?
+responsesid:none
+action:wrong_medicine,set_medicine
+satisfactionrating:50
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:57
+parentid:56
+nodelevel:2
+stage:ordering
+initialline:false
+tags:none
+engline:I think I've taken that one before, do you have it?
+ptline:eu acho que ja tomei esse antes, voce tem?
+responsesid:10,21,58
+action:none
+requiredprofile:any
+targetsatisfaction:50
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:none
+}
+{
+type:player
+id:58
+parentid:57
+nodelevel:3
+stage:ordering
+initialline:false
+tags:none
+engline:it seems I am out of stock...
+ptline:parece que estou sem estoque...
+responsesid:59
+action:no_stock
+satisfactionrating:40
+quickanswer:false
+streaklines:none
+}
+{
+type:npc
+id:59
+parentid:58
+nodelevel:4
+stage:ordering
+initialline:false
+tags:none
+engline:oh, damn... ok, thanks...
+ptline:ah, droga... ok, obrigado...
+responsesid:none
+action:none
+requiredprofile:any
+targetsatisfaction:40
+requirewaiting:none
+dnasex:any
+age:any
+relatedtopics:none
+}
