@@ -27,7 +27,7 @@ public class CallNextPCState extends PCState{
 	}
 
 	protected void createComputer(WorkCounterState state) {
-		StaticObject screen = new StaticObject("startcomputerscreen", new Position(1014, 534), state.getSpriteLibrary(), 5);
+		StaticObject screen = new StaticObject("startcomputerscreen", new Position(714, 434), state.getSpriteLibrary(), 5);
 		UIObject display = new UIObject("clientcountercomputerdisplay", new Position(113, 93), state, 6, screen);
 		String ptDisplayString = "Nro de clientes";
 		String engDisplayString = "No. of clients";

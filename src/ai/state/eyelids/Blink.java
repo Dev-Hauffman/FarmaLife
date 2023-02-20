@@ -27,7 +27,7 @@ public class Blink extends AIState{
             int chanceToBlink = rand.nextInt(101);
             if (chanceToBlink < blinkThreshhold) {
                 if (currentCharacter instanceof AnimatedObject) {
-                    ((AnimatedObject)currentCharacter).getAnimationManager().playAnimation("eyelidsTest", true);
+                    ((AnimatedObject)currentCharacter).getAnimationManager().playAnimation(null, true);
                 }
             }
         }

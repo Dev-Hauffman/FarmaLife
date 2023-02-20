@@ -140,7 +140,7 @@ public class AnimationManager {
     }
 
     public void playAnimation(String name, boolean playLoopBack) {
-        if (!name.equals(currentAnimationName)) {
+        if (name != null && !name.equals(currentAnimationName)) {
             this.currentAnimationSheet = (BufferedImage) spriteSet.getOrGetDefault(name);
             currentAnimationName = name;
             frameIndex = 0;

@@ -18,6 +18,7 @@ public class SpriteLibrary {
         loadSpriteFromDisk();
         // System.out.println(spriteSets.keySet().toString());
         // System.out.println(images.keySet().toString());
+        // spriteSets.get("nose").checkAnimationSheets();
     }
 
     private void loadSpriteFromDisk() {

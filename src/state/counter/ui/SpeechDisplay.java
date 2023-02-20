@@ -99,8 +99,8 @@ public class SpeechDisplay extends UIObject{
     public void loadGraphics(SpriteLibrary spriteLibrary) {
         BufferedImage image = (BufferedImage) ImageUtils.createCompatibleImage(new Size(size.getWidth(), size.getHeight()), ImageUtils.ALPHA_BITMASKED);
         Graphics2D graphics = image.createGraphics();
-        graphics.setColor(Color.BLUE);
-        graphics.drawRect(0, 0, size.getWidth() - 1, size.getHeight() - 1);
+        // graphics.setColor(Color.BLUE);
+        // graphics.drawRect(0, 0, size.getWidth() - 1, size.getHeight() - 1);
         for (GameObject gameText : children) {
             graphics.drawImage(
                 gameText.getSprite(),

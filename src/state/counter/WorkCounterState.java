@@ -15,6 +15,7 @@ import game.settings.GameSettings;
 import gamespace.GameSpace;
 import input.Input;
 import lines.LinesCatalog;
+import state.GameOverState;
 import state.State;
 import state.counter.pc.PCState;
 import state.counter.pc.states.CallNextPCState;
@@ -36,7 +37,7 @@ public class WorkCounterState extends State{
 
     public WorkCounterState(Size windowSize, Input input, GameSettings gameSettings) {
         super(windowSize, input, gameSettings);
-        gameSpace = new GameSpace(new Size(windowSize.getWidth(), 1354));
+        gameSpace = new GameSpace(new Size(windowSize.getWidth(), 920));
         computer = new CallNextPCState(this);
         stock = new MedicineStock();
         linesCatalog = new LinesCatalog();
@@ -51,7 +52,7 @@ public class WorkCounterState extends State{
     private void initializeObjects() {
         gameObjects.add(new Scenery("backwall", new Size(1600, 861), new Position(0,0), spriteLibrary, 1));
         gameObjects.add(new Scenery("counter", new Size(1600, 812), new Position(0,542), spriteLibrary, 3));
-        gameObjects.add(new StaticObject("computercase", new Position(980, 500), spriteLibrary, 4));
+        gameObjects.add(new StaticObject("computercase", new Position(680, 400), spriteLibrary, 4));
         computer.getObjects().forEach(value -> gameObjects.add(value));
         gameObjects.add(speechDisplay);
     }
@@ -71,6 +72,10 @@ public class WorkCounterState extends State{
         }
         quickAnswers.update(this);
         speechDisplay.update(this);
+        if (patientsCounter > 5) {
+            patientsCounter = 0;
+            setNextState(new GameOverState(windowSize, input, gameSettings));
+        }
     }
 
     public PCState getComputer() {

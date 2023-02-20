@@ -40,7 +40,7 @@ public class AnswerPool extends UIObject{
         toRemove = new ArrayList<>();
         history = new ArrayList<>();
         renderOrder = 10;
-        spawningZone = new Rectangle(300, 150, 1000, 450);
+        spawningZone = new Rectangle(200, 150, 900, 350);
         inPool = new boolean[playerLines.size()];
         populate(playerLines, state);
         loadGraphics(state.getSpriteLibrary());
@@ -163,8 +163,8 @@ public class AnswerPool extends UIObject{
     public void loadGraphics(SpriteLibrary spriteLibrary) {
         BufferedImage image = (BufferedImage) ImageUtils.createCompatibleImage(new Size(1600, 900), ImageUtils.ALPHA_BLEND);
         Graphics2D graphics = image.createGraphics();
-        graphics.setColor(Color.BLUE);
-        graphics.drawRect((int)spawningZone.getLocation().getX(), (int)spawningZone.getLocation().getY(), (int)spawningZone.getSize().getWidth()-1, (int)spawningZone.getSize().getHeight()-1);
+        // graphics.setColor(Color.BLUE);
+        // graphics.drawRect((int)spawningZone.getLocation().getX(), (int)spawningZone.getLocation().getY(), (int)spawningZone.getSize().getWidth()-1, (int)spawningZone.getSize().getHeight()-1);
         // graphics.setColor(Color.RED);
         // graphics.drawRect(children.get(0).getPosition().getIntX(), children.get(0).getPosition().getIntY(), children.get(0).getSize().getWidth(), children.get(0).getSize().getWidth());
         for (GameObject gameObject : children) {

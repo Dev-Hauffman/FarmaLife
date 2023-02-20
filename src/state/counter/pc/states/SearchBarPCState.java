@@ -43,7 +43,7 @@ public class SearchBarPCState extends PCState{
     protected void createComputer(WorkCounterState state) {
         chosenResults = new ArrayList<>();
         table = new ArrayList<>();
-        screen = new UIObject("startcomputerscreen", new Position(1014, 534), state, 5);
+        screen = new UIObject("startcomputerscreen", new Position(714, 434), state, 5);
         UIObject searchBarBackground = new UIObject("searchbarbackground", new Position(36, 60), state, 6);
         screen.addChildren(searchBarBackground);
         searchArea = new SearchBar("typingareawhite", new Position(0, 0), state, 6);

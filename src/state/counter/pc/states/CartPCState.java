@@ -65,7 +65,7 @@ public class CartPCState extends PCState{
     @Override
     protected void createComputer(WorkCounterState state) {
         cart = new ArrayList<>();
-        UIObject screen = new UIObject("startcomputerscreen", new Position(1014, 534), state, 5);
+        UIObject screen = new UIObject("startcomputerscreen", new Position(714, 434), state, 5);
         GameText patientInfo = new GameText("Cliente " + "#" + String.format("%03d", WorkCounterState.patientsCounter), state, "testFont", new Position(40, 24), 16, 7);
         screen.addChildren(patientInfo);
         UIObject searchBarBackground = new UIObject("searchbarbackground", new Position(36, 60), state, 6);

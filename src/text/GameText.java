@@ -67,8 +67,8 @@ public class GameText extends UIObject{
         if (getStringSpriteWidth() > 0 && getStringSpriteHeight() > 0) {
             BufferedImage image = (BufferedImage) ImageUtils.createCompatibleImage(new Size(getStringSpriteWidth(), getStringSpriteHeight()), ImageUtils.ALPHA_BITMASKED);
             Graphics2D graphics = image.createGraphics();
-            graphics.setColor(Color.BLUE); // REMOVE
-            graphics.drawRect(0, 0, getStringSpriteWidth() - 1, getStringSpriteHeight() - 1); // REMOVE
+            // graphics.setColor(Color.BLUE); // REMOVE
+            // graphics.drawRect(0, 0, getStringSpriteWidth() - 1, getStringSpriteHeight() - 1); // REMOVE
             for (GameObject gameObject : characters) {
                 graphics.drawImage(
                     gameObject.getSprite(),

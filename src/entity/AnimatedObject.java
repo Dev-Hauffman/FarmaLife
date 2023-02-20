@@ -74,7 +74,7 @@ public class AnimatedObject extends GameObject {
     public void setRotation(Rotation rotation) {
         this.rotation = rotation;
         if (name.equals("eyelids")) { // to blink everytime the head rotates (eyelids rotate with it)
-            animationManager.playAnimation("eyelidsTest", true);
+            animationManager.playAnimation(null, true);
         }
         animationManager.setFinishedRotation(false);
         animationManager.rotate(rotation);

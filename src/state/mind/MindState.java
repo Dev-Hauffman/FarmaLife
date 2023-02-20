@@ -26,20 +26,20 @@ public class MindState extends State{
         super(windowSize, input, gameSettings);
         workState = state;
         answerPool = new AnswerPool(state.getPlayerChoices().getPlayerLines(), this);
-        answerDisplay = new AnswerDisplay(new Position(300, 625), new Size(1000, 125), state, 12);
+        answerDisplay = new AnswerDisplay(new Position(200, 525), new Size(900, 125), state, 12);
         initializeUI();
     }
 
     private void initializeUI() {
         String ptQuestion = "O QUE DIZER?";
         String engQuestion = "WHAT TO SAY?";
-        GameText question = new GameText(GameSettings.language == Language.PORTUGUESE? ptQuestion : engQuestion, this, "testFont", new Position(500, 50), 42, 2);
+        GameText question = new GameText(GameSettings.language == Language.PORTUGUESE? ptQuestion : engQuestion, this, "testFont", new Position(400, 50), 42, 2);
         gameObjects.add(question);
         gameObjects.add(answerDisplay);
         gameObjects.add(answerPool);
         String ptConfirm = "DIZER ISSO";
         String engConfirm = "SAY IT";
-        ButtonObject sayIt = new ButtonObject(GameSettings.language == Language.PORTUGUESE? ptConfirm : engConfirm, new Size(250, 50), this, new Position(700, 800), 2, false, (localState) -> {
+        ButtonObject sayIt = new ButtonObject(GameSettings.language == Language.PORTUGUESE? ptConfirm : engConfirm, new Size(250, 50), this, new Position(550, 650), 2, false, (localState) -> {
             System.out.println("clicked");
             if (answerPool.getSelectedLine() != null) {
                 ActionProcessor.process(answerPool.getSelectedLine(), workState);
